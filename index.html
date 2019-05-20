@@ -1,0 +1,132 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slayer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="./graphics.js"></script>
+    <script src="./deck.js"></script>
+    <script src="./player.js"></script>
+    <script src="./hand.js"></script>
+    <script src="./game.js"></script>
+    <script src="./cards.js"></script>
+    <script src="./enemy.js"></script>
+    <script src="./room.js"></script>
+    <script src="./rain.js"></script>
+
+
+
+
+
+
+</head>
+
+<img id="defend" src="https://vignette.wikia.nocookie.net/slay-the-spire/images/7/71/Defend_B.png/revision/latest?cb=20181016203327" >
+<img id="attack" src="https://vignette.wikia.nocookie.net/slay-the-spire/images/0/06/Strike_R.png/revision/latest?cb=20181016211045" >
+<img id="heal" src="./assets/BandageUp.png" style="display: none;">
+<img id="strength" src="./assets/Flex.png" style="display: none;">
+<img id="clothesline" src="./assets/Clothesline.png" style="display: none;">
+<img id="bloodletting" src="./assets/bloodletting.png" style="display: none;">
+
+
+
+
+<img id="deckback" src="http://1.bp.blogspot.com/-bdShT7PuGW0/VOnOQ6ecqyI/AAAAAAAAJw4/b96pcYgtrO8/s1600/Liz%27sdefend_cardbackCropped.jpg" >
+
+
+<img id="background" src="https://wiki.mabinogiworld.com/images/9/98/Alby_Hardmode_Room.png" >
+<img id="p1" class="player" src="./assets/ha610_11.png" style="display: none;"></img>
+<img id="p2" class="player" src="./assets/ha610_12.png" style="display: none;"></img>
+<img id="p3" class="player" src="./assets/ha610_13.png" style="display: none;"></img>
+<img id="p4" class="player" src="./assets/ha610_14.png" style="display: none;"></img>
+<img id="p5" class="player" src="./assets/ha610_15.png" style="display: none;"></img>
+<img id="p6" class="player" src="./assets/ha610_16.png" style="display: none;"></img>
+<img id="p7" class="player" src="./assets/ha610_17.png" style="display: none;"></img>
+<img id="p8" class="player" src="./assets/ha610_18.png" style="display: none;"></img>
+
+<img id="a1" class="player" src="./assets/vrhaef252_00.png" style="display: none;"></img>
+<img id="a2" class="player" src="./assets/vrhaef252_01.png" style="display: none;"></img>
+<img id="a3" class="player" src="./assets/vrhaef252_02.png" style="display: none;"></img>
+<img id="a4" class="player" src="./assets/vrhaef252_03.png" style="display: none;"></img>
+<img id="a5" class="player" src="./assets/vrhaef252_04.png" style="display: none;"></img>
+
+<img id="scorpion"  src="./assets/scorpion.png" style="display: none;"></img>
+<img id="energy" src="./assets/sword.png" style="display: none;"></img>
+<img id="button"  src="./assets/button.png" ></img>
+<img id="heart" src="./assets/heart.png" style="display: none;"></img>
+<img id="enemyheart" src="./assets/enemyHeart.png" style="display: none;"></img>
+<img id="shield" src="./assets/shield2.png" style="display: none;"></img>
+<img id="shield3" src="./assets/shield3.png" style="display: none;"></img>
+<img id="notenoughenergy" src="./assets/not_enough_energy.png" style="display: none;"></img>
+<img id="splash" src="./assets/Splash.jpg" style="display: none;"></img>
+
+
+
+
+<body>
+    
+    <div id="center-div">
+
+        <h1>Slayer</h1>
+
+        <canvas id="game-canvas" width="1300" height="645"> 
+        </canvas>
+        <div class="ui-sound">
+            <span class="title"></span>
+            <button id="play"><i >Play</i></button>
+            <button id="pause"><i >Pause</i></button>
+            <button id="mute"><i >Mute</i></button>
+        </div>
+
+        <audio id="slash" controls style="display: none;">
+            <source src="./assets/slash.mp3">
+        </audio>
+
+        <audio id="shieldsound" controls style="display: none;">
+            <source src="./assets/shield.wav">
+        </audio>
+
+        <script>
+            const bgm = new Audio("./assets/BGM.mp3"); 
+            window.bgm = bgm
+            const playButton = document.getElementById("play");
+            const pauseButton = document.getElementById("pause");
+            const muteButton = document.getElementById("mute");
+            
+
+        
+
+             playButton.addEventListener("click", function () {
+                    bgm.play();
+                    playButton.style.display = "none";
+                    pauseButton.style.display = "inline";
+                });
+
+                pauseButton.addEventListener("click", function () {
+                    bgm.pause();
+                    pauseButton.style.display = "none";
+                    playButton.style.display = "inline";
+                });
+
+                muteButton.addEventListener("click", function () {
+                    bgm.volume = 0;
+                    for (let i = 0; i < soundEffects.length; i++) {
+                        soundEffects[i].volume = 0;
+                    }
+
+                    muteButton.style.display = "none";
+                    volumeButton.style.display = "inline";
+                });
+
+                
+
+
+
+        </script>
+    </div>
+
+</body>
+</html>

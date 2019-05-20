@@ -1,0 +1,59 @@
+#defend, #deckback, #background, #attack {
+    display: none;
+}
+
+
+#game-canvas {
+    /* background: url("https://wiki.mabinogiworld.com/images/9/98/Alby_Hardmode_Room.png") */
+    background-image: url("./assets/forest2.jpg");
+    /* width: 1000px; */
+    /* object-fit: fill; */
+    
+}
+
+#center-div {
+    background: black;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+    color: white;
+}
+
+body {
+    margin: 0px;
+}
+
+#button {
+    display: none;
+    position: relative; 
+    top: 400px;
+    left: 1000px;
+    width: 180px;
+    height: 70px;
+    
+}
+
+#button:hover {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
