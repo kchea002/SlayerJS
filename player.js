@@ -6,11 +6,10 @@ class Player {
        
         this.canvas = canvas;
         this.ctx = ctx;
-        this.graphic = new Graphic(this.ctx)
         this.room = room;
         this.enemy = room.enemy;
         this.state = state;
-
+        this.graphic = new Graphic(this.ctx)
 
         this.health = 30; 
         // this.energy = Math.floor(1.8 + (Math.random() * 3))
@@ -161,6 +160,7 @@ class Player {
                 this.health += card.value; 
             } else if (card.type === "strength") {
                     this.strength += card.value;
+                    // this.graphic.sCount = 0
             } else if (card.type === "bloodletting") {
                 this.health += card.value
                 this.energy += 1

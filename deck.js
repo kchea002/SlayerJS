@@ -7,7 +7,7 @@ class Deck {
         while (cardArr.length < 12) {
             cardArr.push(new defendCard)
             cardArr.push(new attackCard);
-            // cardArr.push(new bloodletting)
+            // cardArr.push(new strengthCard)
         }
 
        

@@ -5,6 +5,9 @@ class Graphic {
         this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"]
         this.elementIds = ["a2", "a3"];
         this.playerId = "p8"
+        this.strengthIds = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "s12", "s13", "s14", "s15", "s16", "s17", "s18", "s19", "s20", "s21", "s22", "s23" ];
+        this.strengthY = 165
+        this.strengthX = 100
 
         this.energyY = 110;
         this.energySwitch = false; 
@@ -14,7 +17,8 @@ class Graphic {
         this.eCount = 0
         this.pCount = 0
         this.dCount = 0
-       
+        this.sCount = 19
+       console.log(this.sCount)
         this.attackAnimation = this.attackAnimation.bind(this)
         this.attackFrame = this.attackFrame.bind(this)
         this.notEnoughEnergy = this.notEnoughEnergy.bind(this)
@@ -30,6 +34,10 @@ class Graphic {
         this.enemyHeart();
         this.displayEnemyShield()
         this.displayTurnNumber();
+        // if (this.sCount < 19){
+        //     this.strengthAnimation()
+        // }
+       
     }
 
     // VERSION 1 PLAYER HEART
@@ -92,6 +100,31 @@ class Graphic {
         
     };
 
+    // strengthAnimation(){
+    //     this.sCount += 1
+    //     if (this.sCount < 19){
+    //         if (this.sCount > 6 && this.sCount < 19 ){
+    //             this.strengthX = 155;
+    //             this.strengthY += 1;
+    //         } else {
+    //             this.strengthX = 100;
+    //             // this.strengthY = 170;
+    //         }
+
+    //         let id = this.strengthIds[this.sCount]
+    //         let img = document.getElementById(id);
+    //         this.ctx.drawImage(img, 350, 140, this.strengthX, this.strengthY);
+    //     } else {
+    //         // this.sCount = 0
+    //         this.strengthY = 150;
+    //         this.strengthX = 100;
+
+    //     }
+        
+    // }
+
+
+
     attackAnimation() {
     
          setTimeout(() => {
@@ -118,7 +151,7 @@ class Graphic {
 
         let x = 320
         this.dCount += 1
-        console.log(this.dCount)
+       
         if (this.dCount === 10) {
             for (let index = 1; index <= this.player.energy; index++) {
 

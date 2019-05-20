@@ -10,11 +10,13 @@ class Game {
         
         this.room = new Room(this.ctx)
         this.enemy = this.room.enemy;
-        this.rain = new Rain(this.ctx, this.canvas)
+      
 
-        this.deck = new Deck
+        this.deck = new Deck()
         this.player = new Player(this.ctx, this.enemy, this.canvas, this.room, this.deck, this.state);
+
         this.graphic = new Graphic(this.ctx, this.player, this.room)
+        this.rain = new Rain(this.ctx, this.canvas, this.graphic)
 
 
         
@@ -34,9 +36,7 @@ class Game {
     }
 
     startScreen(){
-        // this.ctx.rect(0, 0, this.canvas.width, this.canvas.height); 
-        // this.ctx.fillStyle = "black";
-        // this.ctx.fill()
+       
 
         let img = document.getElementById("splash")
         this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
@@ -46,13 +46,30 @@ class Game {
         this.ctx.fillText("PRESS ANY BUTTON TO BEGIN", 850, 600);
 
         const startPress = (event) => {
-                this.state = "playMode"
-                window.bgm.play()
+                this.state = "instruction"
                 removeEventListener("click", startPress);
             }
 
         addEventListener("keypress", startPress );
 
+    }
+
+    instructionScreen(){
+
+        let img = document.getElementById("instruction")
+        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
+
+        this.ctx.font = "bold 28px Arial";
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("PRESS ANY BUTTON TO CONTINUE", 400, 600);
+
+        const startPress = (event) => {
+            this.state = "playMode"
+            window.bgm.play()
+            removeEventListener("click", startPress);
+        }
+
+        addEventListener("keypress", startPress);
     }
 
 
@@ -64,6 +81,8 @@ class Game {
 
         if (this.state === "startScreen"){
             this.startScreen();
+        } else if (this.state === "instruction") {
+            this.instructionScreen();
         } else if (this.state === "playMode") {
             this.rain.draw();
             this.deckback();
@@ -95,7 +114,7 @@ class Game {
 
         
         this.ctx.fillRect(400, 200, 200, 200)
-        this.ctx.fillRect(700, 150, 500, 450)
+        this.ctx.fillRect(650, 150, 500, 450)
         // this.ctx.fillStyle="white"
         this.ctx.fill();
 
@@ -275,6 +294,17 @@ class Game {
             this.ctx.font = "bold italic 40px Arial";
             this.ctx.fillStyle = "white"
             this.ctx.fillText("Final Area: "+ this.room.level, 650, 300);
+
+            //  this.ctx.font = "bold 28px Arial";
+            //  this.ctx.fillStyle = "white"
+            // this.ctx.fillText("PRESS ANY BUTTON TO GO BACK TO THE START SCREEN", 650, 500);
+
+            // const startPress = (event) => {
+            //     this.state = "startScreen"
+                
+            //     removeEventListener("click", startPress);
+            //  }
+            // addEventListener("keypress", startPress);
     }
 
 
