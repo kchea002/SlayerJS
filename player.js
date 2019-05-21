@@ -169,7 +169,7 @@ class Player {
                 this.slashSound.play()
                 let totalAtk = card.value + this.strength;
                 if (this.enemy.weakened > 0) {
-                    totalAtk *= 2;
+                    totalAtk *= 1.5;
                 }
                 if (this.enemy.armor >= totalAtk) {
                     this.enemy.armor -= totalAtk;
