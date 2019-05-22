@@ -7,7 +7,7 @@ class Deck {
         while (cardArr.length < 12) {
             cardArr.push(new defendCard)
             cardArr.push(new attackCard);
-            // cardArr.push(new bloodletting)
+            // cardArr.push(new metalCard)
         }
 
        
@@ -48,6 +48,8 @@ class Deck {
             this.AllCards.push(new clothesline)
         } else if (type === "bloodletting") {
             this.AllCards.push(new bloodletting)
+        } else if (type === "metal") {
+            this.AllCards.push(new metalCard)
         }
     }
 

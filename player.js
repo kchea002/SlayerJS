@@ -17,6 +17,7 @@ class Player {
         this.armor = 0;
         this.strength = 0;
         this.nextEnergyBonus = 0;
+        this.metalBonus = 0
 
         this.slashSound = document.getElementById("slash");
         this.shieldSound = document.getElementById("shieldsound");
@@ -180,7 +181,10 @@ class Player {
             } else if (card.type === "bloodletting") {
                 this.health += card.value
                 this.nextEnergyBonus += 1
-            } else if (card.type === "attack" || card.type === "clothesline") {
+            } else if (card.type === "metal") {
+                this.metalBonus += card.value
+                this.shieldSound.play()
+            }else if (card.type === "attack" || card.type === "clothesline") {
                 this.graphic.attackAnimation()
                 this.slashSound.play()
                 let totalAtk = card.value + this.strength;

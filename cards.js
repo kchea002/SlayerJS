@@ -52,3 +52,12 @@ class bloodletting {
         this.cost = 0;
     }
 }
+
+class metalCard {
+    constructor() {
+        this.img = document.getElementById("metal");
+        this.type = "metal";
+        this.value = 3;
+        this.cost = 2;
+    }
+}

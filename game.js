@@ -116,8 +116,9 @@ class Game {
         // this.ctx.fill();
 
         
-        this.ctx.fillRect(400, 200, 200, 200)
-        this.ctx.fillRect(650, 150, 500, 450)
+        // this.ctx.fillRect(400, 200, 200, 200)
+        this.ctx.fillRect(700, 150, 450, 450)
+        this.ctx.fillRect(150, 150, 450, 450)
         // this.ctx.fillStyle="white"
         this.ctx.fill();
 
@@ -147,6 +148,9 @@ class Game {
 
         let img4 = document.getElementById("bloodletting")
         this.ctx.drawImage(img4, 740, 420, 170, 170)
+
+        let img5 = document.getElementById("metal")
+        this.ctx.drawImage(img5, 400, 420, 170, 170)
 
     }
 
@@ -229,6 +233,21 @@ class Game {
         }
         addEventListener("click", rc4e);
 
+        let rewardMetal = new Path2D();
+        rewardMetal.rect(440, 420, 170, 170);
+        const rc5e = (event) => {
+            if (this.state === "rewardScreen") {
+                if (this.ctx.isPointInPath(rewardMetal, event.clientX - canv.x, event.clientY - canv.y)) {
+                    this.deck.addCard("metal");
+                    this.state = "playMode";
+                    this.deck.reload();
+                    this.player.drawCards();
+                    this.player.showCards();
+                }
+            }
+        }
+        addEventListener("click", rc5e);
+
      
 
     }
@@ -262,7 +281,7 @@ class Game {
         }
 
         this.enemy.action = this.enemy.randomAction();
-        this.player.armor = 0;
+        this.player.armor = 0 + this.player.metalBonus;
         this.player.energy = 3 + this.player.nextEnergyBonus;
         this.player.nextEnergyBonus = 0;
         this.player.strength = 0;
@@ -280,6 +299,8 @@ class Game {
         this.player.energy = 3;
         this.player.armor = 0;
         this.player.strength = 0;
+        this.player.nextEnergyBonus = 0
+        this.player.metalBonus = 0
         this.room.turn = 1;
         this.room.nextLevel();
         this.enemy = this.room.enemy;
