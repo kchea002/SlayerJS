@@ -21,7 +21,7 @@ class Game {
 
         
         this.player.showCards();
-        
+        this.eCount = 10
 
         this.deckback = this.deckback.bind(this);
 
@@ -63,13 +63,13 @@ class Game {
         this.ctx.fillStyle = "white"
         this.ctx.fillText("PRESS ANY BUTTON TO CONTINUE", 400, 600);
 
-        const startPress = (event) => {
+        const startPress2 = (event) => {
             this.state = "playMode"
             window.bgm.play()
-            removeEventListener("click", startPress);
+            removeEventListener("click", startPress2);
         }
 
-        addEventListener("keypress", startPress);
+        addEventListener("keypress", startPress2);
     }
 
 
@@ -90,6 +90,9 @@ class Game {
             this.enemy.draw();
             this.player.draw();
             this.room.draw();
+            if (this.eCount < 10){
+                this.enemyTurnBanner()
+            }
         } else if (this.state === "rewardScreen"){
             this.rewardScreen();
         } else if (this.state === "loseScreen"){
@@ -158,7 +161,9 @@ class Game {
                 removeEventListener("click", rhp);
                 this.player.health += 8;
                 this.state = "playMode";
-                
+                this.deck.reload();
+                this.player.drawCards();
+                this.player.showCards();
             }
         }
 
@@ -294,6 +299,7 @@ class Game {
             this.ctx.font = "bold italic 40px Arial";
             this.ctx.fillStyle = "white"
             this.ctx.fillText("Final Area: "+ this.room.level, 650, 300);
+            
 
             //  this.ctx.font = "bold 28px Arial";
             //  this.ctx.fillStyle = "white"
@@ -334,7 +340,8 @@ class Game {
        addEventListener("click", (event) => {
             const rec = this.canvas.getBoundingClientRect();
             if (this.ctx.isPointInPath(button, event.clientX - rec.x, event.clientY - rec.y)) {
-                this.enemyTurn()
+                setTimeout( ()=>{this.enemyTurn()}, 1000)
+                this.eCount = 0
                 // alert("OPPONENT'S TURN")
             }
            
@@ -365,6 +372,30 @@ class Game {
         // })
     }
 
+    enemyTurnBanner(){
+        this.eCount += 1
+        
+
+        this.ctx.fillStyle = "rgba(0,0,0,0.5)";
+        this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+
+        
+        this.ctx.fillRect(0,75, this.canvas.width, 150)
+        this.ctx.fill()
+    
+        
+        this.ctx.font = "bold italic 55px Arial";
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("Enemy Turn", 650, 180);
+
+        this.ctx.fillStyle = "red"
+        this.ctx.rect(0, 20, this.canvas.width, 100)
+
+    
+    
+
+        
+    }
 
 
     

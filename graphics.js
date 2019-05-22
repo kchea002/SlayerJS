@@ -17,8 +17,6 @@ class Graphic {
         this.eCount = 0
         this.pCount = 0
         this.dCount = 0
-        this.sCount = 19
-       console.log(this.sCount)
         this.attackAnimation = this.attackAnimation.bind(this)
         this.attackFrame = this.attackFrame.bind(this)
         this.notEnoughEnergy = this.notEnoughEnergy.bind(this)
@@ -28,16 +26,22 @@ class Graphic {
 
     draw(){
         this.displaySwordEnergy();
-        this.playerAnimation();
+        // this.playerAnimation();
         this.playerHealth();
         this.displayShield();
         this.enemyHeart();
         this.displayEnemyShield()
         this.displayTurnNumber();
-        // if (this.sCount < 19){
-        //     this.strengthAnimation()
-        // }
+        console.log("DRAW CALLED", this.sCount)
+        if (this.sCount < 19){
+            console.log("IVE BEEN CALLED", this.sCount)
+            this.strengthAnimation()
+        }
        
+    }
+
+    reset(){
+        this.sCount = 0
     }
 
     // VERSION 1 PLAYER HEART
@@ -47,8 +51,8 @@ class Graphic {
     // }
 
     playerHealth() {
-        let img = document.getElementById("heart")
-        this.ctx.drawImage(img, 330, 310, 160, 50)
+        let img = document.getElementById("enemyheart")
+        this.ctx.drawImage(img, 384, 323, 50, 45)
     }
 
     enemyHeart(){
@@ -72,53 +76,52 @@ class Graphic {
         this.ctx.fillText("Turn: " + this.room.turn, 100, 80);
     }
 
-    playerAnimation() {
-        // let playerId = null;
-        this.pCount += 1
-
-        if (this.pCount === 4) {
-            if (this.playerIds.length > 0) {
-                this.playerId = this.playerIds.shift();
-            } else {
-                this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"];
-                this.playerId = this.playerIds.shift();
-            }
-            let img = document.getElementById(this.playerId);
-            this.ctx.drawImage(img, 350, 150, 100, 150);
-            this.pCount = 0
-
-        } else {
-            // console.log(this.playerId)
-            // if (this.playerIds.length === 0) {
-            //     let img = document.getElementById(this.defaultId);
-            //     this.ctx.drawImage(img, 350, 150, 100, 150);
-            // } else {
-                let img = document.getElementById(this.playerId);
-                this.ctx.drawImage(img, 350, 150, 100, 150);
-            // }
-        }
+    // playerAnimation() {
         
-    };
+    //     this.pCount += 1
+
+    //     if (this.pCount === 4) {
+    //         if (this.playerIds.length > 0) {
+    //             this.playerId = this.playerIds.shift();
+    //         } else {
+    //             this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"];
+    //             this.playerId = this.playerIds.shift();
+    //         }
+    //         let img = document.getElementById(this.playerId);
+    //         this.ctx.drawImage(img, 350, 150, 100, 150);
+    //         this.pCount = 0
+
+    //     } else {
+    //             let img = document.getElementById(this.playerId);
+    //             this.ctx.drawImage(img, 350, 150, 100, 150);
+    //     }
+        
+    // };
 
     // strengthAnimation(){
+    //     console.log("ANIMATIONCOUNT", this.sCount)
     //     this.sCount += 1
     //     if (this.sCount < 19){
-    //         if (this.sCount > 6 && this.sCount < 19 ){
+    //         if (this.sCount > 6 && this.sCount < 15){
     //             this.strengthX = 155;
     //             this.strengthY += 1;
     //         } else {
     //             this.strengthX = 100;
-    //             // this.strengthY = 170;
+    //             this.strengthY = 170;
     //         }
 
     //         let id = this.strengthIds[this.sCount]
     //         let img = document.getElementById(id);
     //         this.ctx.drawImage(img, 350, 140, this.strengthX, this.strengthY);
-    //     } else {
-    //         // this.sCount = 0
-    //         this.strengthY = 150;
-    //         this.strengthX = 100;
+           
+    //     // } 
+    //     //     // // this.sCount = 0
+    //     //     // this.strengthY = 150;
+    //     //     // this.strengthX = 100;
 
+    //     // }
+    //     } else {
+    //         this.sCount = 0
     //     }
         
     // }

@@ -20,6 +20,14 @@ class Player {
         this.slashSound = document.getElementById("slash");
         this.shieldSound = document.getElementById("shieldsound");
 
+        this.strengthIds = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "s12", "s13", "s14", "s15", "s16", "s17", "s18", "s19", "s20", "s21", "s22", "s23"];
+        this.strengthY = 165
+        this.strengthX = 100
+        this.sCount = 19
+
+        this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"]
+        this.pCount = 0
+
     
         // CARD AREA 1 LISTERNER
         const cardOne = new Path2D();
@@ -88,6 +96,12 @@ class Player {
     draw() {
         this.showCards();
         this.displayStats();
+        if (this.sCount < 19) {
+            this.strengthAnimation()
+        } else {
+            this.playerAnimation()
+        }
+    
     }
 
 
@@ -160,7 +174,8 @@ class Player {
                 this.health += card.value; 
             } else if (card.type === "strength") {
                     this.strength += card.value;
-                    // this.graphic.sCount = 0
+                    this.sCount = 0
+                    //  console.log(this.graphic.sCount)
             } else if (card.type === "bloodletting") {
                 this.health += card.value
                 this.energy += 1
@@ -196,6 +211,46 @@ class Player {
     }
 
     
-   
+    strengthAnimation() {
+        console.log("ANIMATIONCOUNT", this.sCount)
+        this.sCount += 1
+        if (this.sCount < 19) {
+            if (this.sCount > 6 && this.sCount < 15) {
+                this.strengthX = 155;
+                this.strengthY += 1;
+            } else {
+                this.strengthX = 100;
+                this.strengthY = 170;
+            }
+
+            let id = this.strengthIds[this.sCount]
+            let img = document.getElementById(id);
+            this.ctx.drawImage(img, 350, 140, this.strengthX, this.strengthY);
+
+        }
+    }
+
+    playerAnimation() {
+
+        this.pCount += 1
+
+        if (this.pCount === 4) {
+            if (this.playerIds.length > 0) {
+                this.playerId = this.playerIds.shift();
+            } else {
+                this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"];
+                this.playerId = this.playerIds.shift();
+            }
+            let img = document.getElementById(this.playerId);
+            this.ctx.drawImage(img, 350, 150, 100, 150);
+            this.pCount = 0
+
+        } else {
+            let img = document.getElementById(this.playerId);
+            this.ctx.drawImage(img, 350, 150, 100, 150);
+        }
+
+    };
+
     
 }

@@ -29,7 +29,7 @@ class strengthCard {
     constructor() {
         this.img = document.getElementById("strength");
         this.type = "strength";
-        this.value = 2;
+        this.value = 4;
         this.cost = 0;
     }
 }
