@@ -31,7 +31,75 @@ class Game {
 
         this.rootDraw();
 
-        
+
+
+        const cardOne = new Path2D();
+        cardOne.rect(460, 430, 180, 200);
+        this.ctx.fill(cardOne);
+
+        let canv = this.canvas.getBoundingClientRect();
+
+        addEventListener("click", (event) => {
+
+            if (this.ctx.isPointInPath(cardOne, event.clientX - canv.x, event.clientY - canv.y)) {
+               if (this.state === "playMode"){
+                   this.player.playCardOne(2);
+               }
+            }
+        })
+
+        // CARD AREA 2 LISTERNER
+        const cardTwo = new Path2D();
+        cardTwo.rect(660, 430, 180, 200);
+        this.ctx.fill(cardTwo);
+
+        addEventListener("click", (event) => {
+            if (this.ctx.isPointInPath(cardTwo, event.clientX - canv.x, event.clientY - canv.y)) {
+                if (this.state === "playMode") {
+                    this.player.playCardOne(1);
+                }
+            }
+        })
+
+        // CARD AREA 3 LISTERNER
+        const cardThree = new Path2D();
+        cardThree.rect(860, 430, 180, 200);
+        this.ctx.fill(cardThree);
+
+        addEventListener("click", (event) => {
+            if (this.ctx.isPointInPath(cardThree, event.clientX - canv.x, event.clientY - canv.y)) {
+                if (this.state === "playMode") {
+                    this.player.playCardOne(0);
+                }
+            }
+        })
+
+        // CARD AREA 4 LISTERNER
+        const cardFour = new Path2D();
+        cardFour.rect(260, 430, 180, 200);
+        // this.ctx.fillStyle = "black";
+        this.ctx.fill(cardFour);
+
+        addEventListener("click", (event) => {
+            if (this.ctx.isPointInPath(cardFour, event.clientX - canv.x, event.clientY - canv.y)) {
+                if (this.state === "playMode") {
+                    this.player.playCardOne(3);
+                }
+            }
+        })
+
+        const cardFive = new Path2D();
+        cardFive.rect(60, 430, 180, 200);
+        // this.ctx.fillStyle = "black";
+        this.ctx.fill(cardFive);
+
+        addEventListener("click", (event) => {
+            if (this.ctx.isPointInPath(cardFive, event.clientX - canv.x, event.clientY - canv.y)) {
+                if (this.state === "playMode") {
+                    this.player.playCardOne(4);
+                }
+            }
+        })
 
     }
 
@@ -362,9 +430,10 @@ class Game {
        addEventListener("click", (event) => {
             const rec = this.canvas.getBoundingClientRect();
             if (this.ctx.isPointInPath(button, event.clientX - rec.x, event.clientY - rec.y)) {
-                setTimeout( ()=>{this.enemyTurn()}, 1000)
-                this.eCount = 0
-                // alert("OPPONENT'S TURN")
+                if (this.state === "playMode") {
+                    setTimeout(() => { this.enemyTurn() }, 1000)
+                    this.eCount = 0
+                }
             }
            
         }) 

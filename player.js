@@ -35,64 +35,64 @@ class Player {
 
     
         // CARD AREA 1 LISTERNER
-        const cardOne = new Path2D();
-        cardOne.rect(460, 430, 180, 200);
-        this.ctx.fill(cardOne);
+        // const cardOne = new Path2D();
+        // cardOne.rect(460, 430, 180, 200);
+        // this.ctx.fill(cardOne);
 
-        let canv = this.canvas.getBoundingClientRect();
+        // let canv = this.canvas.getBoundingClientRect();
 
-        addEventListener("click", (event) => {
+        // addEventListener("click", (event) => {
             
-            if (this.ctx.isPointInPath(cardOne, event.clientX - canv.x, event.clientY - canv.y)) {
-                this.playCardOne(2);
+        //     if (this.ctx.isPointInPath(cardOne, event.clientX - canv.x, event.clientY - canv.y)) {
+        //         this.playCardOne(2);
                 
-            }
-        })
+        //     }
+        // })
 
-        // CARD AREA 2 LISTERNER
-        const cardTwo = new Path2D();
-        cardTwo.rect(660, 430, 180, 200);
-        this.ctx.fill(cardTwo);
+        // // CARD AREA 2 LISTERNER
+        // const cardTwo = new Path2D();
+        // cardTwo.rect(660, 430, 180, 200);
+        // this.ctx.fill(cardTwo);
 
-        addEventListener("click", (event) => {
-            if (this.ctx.isPointInPath(cardTwo, event.clientX - canv.x, event.clientY - canv.y)) {
-                this.playCardOne(1);
-            }
-        })
+        // addEventListener("click", (event) => {
+        //     if (this.ctx.isPointInPath(cardTwo, event.clientX - canv.x, event.clientY - canv.y)) {
+        //         this.playCardOne(1);
+        //     }
+        // })
 
-        // CARD AREA 3 LISTERNER
-        const cardThree = new Path2D();
-        cardThree.rect(860, 430, 180, 200);
-        this.ctx.fill(cardThree);
+        // // CARD AREA 3 LISTERNER
+        // const cardThree = new Path2D();
+        // cardThree.rect(860, 430, 180, 200);
+        // this.ctx.fill(cardThree);
 
-        addEventListener("click", (event) => {
-            if (this.ctx.isPointInPath(cardThree, event.clientX - canv.x, event.clientY - canv.y)) {
-                this.playCardOne(0);
-            }
-        })
+        // addEventListener("click", (event) => {
+        //     if (this.ctx.isPointInPath(cardThree, event.clientX - canv.x, event.clientY - canv.y)) {
+        //         this.playCardOne(0);
+        //     }
+        // })
 
-        // CARD AREA 4 LISTERNER
-        const cardFour = new Path2D();
-        cardFour.rect(260, 430, 180, 200);
-        // this.ctx.fillStyle = "black";
-        this.ctx.fill(cardFour);
+        // // CARD AREA 4 LISTERNER
+        // const cardFour = new Path2D();
+        // cardFour.rect(260, 430, 180, 200);
+        // // this.ctx.fillStyle = "black";
+        // this.ctx.fill(cardFour);
 
-        addEventListener("click", (event) => {
-            if (this.ctx.isPointInPath(cardFour, event.clientX - canv.x, event.clientY - canv.y)) {
-                this.playCardOne(3);
-            }
-        })
+        // addEventListener("click", (event) => {
+        //     if (this.ctx.isPointInPath(cardFour, event.clientX - canv.x, event.clientY - canv.y)) {
+        //         this.playCardOne(3);
+        //     }
+        // })
 
-        const cardFive = new Path2D();
-        cardFive.rect(60, 430, 180, 200);
-        // this.ctx.fillStyle = "black";
-        this.ctx.fill(cardFive);
+        // const cardFive = new Path2D();
+        // cardFive.rect(60, 430, 180, 200);
+        // // this.ctx.fillStyle = "black";
+        // this.ctx.fill(cardFive);
 
-        addEventListener("click", (event) => {
-            if (this.ctx.isPointInPath(cardFive, event.clientX - canv.x, event.clientY - canv.y)) {
-                this.playCardOne(4);
-            }
-        })
+        // addEventListener("click", (event) => {
+        //     if (this.ctx.isPointInPath(cardFive, event.clientX - canv.x, event.clientY - canv.y)) {
+        //         this.playCardOne(4);
+        //     }
+        // })
         
 
         this.drawCards = this.drawCards.bind(this)
