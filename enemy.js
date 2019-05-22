@@ -42,6 +42,7 @@ class Enemy {
 
         this.shuffleArray(enemyActions);
 
+
         return enemyActions[0];
     }
 

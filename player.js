@@ -156,6 +156,12 @@ class Player {
             this.ctx.fillStyle = "red"
             this.ctx.fillText(this.strength, 495, 235);
         }
+
+        if (this.metalBonus > 0) {
+            this.ctx.font = "bold 28px Arial";
+            this.ctx.fillStyle = "blue"
+            this.ctx.fillText(this.metalBonus, 495, 200);
+        }
         
         
 

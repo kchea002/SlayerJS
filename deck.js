@@ -7,7 +7,9 @@ class Deck {
         while (cardArr.length < 12) {
             cardArr.push(new defendCard)
             cardArr.push(new attackCard);
-            // cardArr.push(new metalCard)
+            // cardArr.push(new metalCard);
+            // cardArr.push(new strengthCard);
+
         }
 
        
