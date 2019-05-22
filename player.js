@@ -27,8 +27,11 @@ class Player {
         this.strengthX = 100
         this.sCount = 19
 
+        this.defendIds = ["d1", "d2", "d3"]
+
         this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"]
         this.pCount = 0
+        this.dCount = 10;
 
     
         // CARD AREA 1 LISTERNER
@@ -100,6 +103,8 @@ class Player {
         this.displayStats();
         if (this.sCount < 19) {
             this.strengthAnimation()
+        } else if (this.dCount < 10){ 
+            this.defendAnimation()
         } else {
             this.playerAnimation()
         }
@@ -178,12 +183,12 @@ class Player {
             if (card.type === "defend") {
                 this.armor += card.value;
                 this.shieldSound.play()
+                this.dCount = 0
             } else if (card.type === "heal") {
                 this.health += card.value; 
             } else if (card.type === "strength") {
                     this.strength += card.value;
                     this.sCount = 0
-                    //  console.log(this.graphic.sCount)
             } else if (card.type === "bloodletting") {
                 this.health += card.value
                 this.nextEnergyBonus += 1
@@ -223,7 +228,6 @@ class Player {
 
     
     strengthAnimation() {
-        console.log("ANIMATIONCOUNT", this.sCount)
         this.sCount += 1
         if (this.sCount < 19) {
             if (this.sCount > 6 && this.sCount < 15) {
@@ -239,6 +243,20 @@ class Player {
             this.ctx.drawImage(img, 350, 140, this.strengthX, this.strengthY);
 
         }
+    }
+
+    defendAnimation() {
+        this.dCount += 1
+        if (this.dCount < 3) {
+            let id = this.defendIds[this.dCount]
+            let img = document.getElementById(id);
+            this.ctx.drawImage(img, 350, 150, 100, 150);
+        } else {
+            let id = this.defendIds[2]
+            let img = document.getElementById(id);
+            this.ctx.drawImage(img, 350, 150, 100, 150);
+        }
+    
     }
 
     playerAnimation() {

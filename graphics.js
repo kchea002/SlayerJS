@@ -2,12 +2,8 @@
 class Graphic {
     constructor(ctx, player, room){
         this.ctx = ctx
-        this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"]
         this.elementIds = ["a2", "a3"];
         this.playerId = "p8"
-        this.strengthIds = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "s12", "s13", "s14", "s15", "s16", "s17", "s18", "s19", "s20", "s21", "s22", "s23" ];
-        this.strengthY = 165
-        this.strengthX = 100
 
         this.energyY = 110;
         this.energySwitch = false; 
@@ -15,7 +11,6 @@ class Graphic {
         this.room = room;
 
         this.eCount = 0
-        this.pCount = 0
         this.dCount = 0
         this.attackAnimation = this.attackAnimation.bind(this)
         this.attackFrame = this.attackFrame.bind(this)
