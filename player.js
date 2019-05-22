@@ -16,6 +16,7 @@ class Player {
         this.energy = 3;
         this.armor = 0;
         this.strength = 0;
+        this.nextEnergyBonus = 0;
 
         this.slashSound = document.getElementById("slash");
         this.shieldSound = document.getElementById("shieldsound");
@@ -178,7 +179,7 @@ class Player {
                     //  console.log(this.graphic.sCount)
             } else if (card.type === "bloodletting") {
                 this.health += card.value
-                this.energy += 1
+                this.nextEnergyBonus += 1
             } else if (card.type === "attack" || card.type === "clothesline") {
                 this.graphic.attackAnimation()
                 this.slashSound.play()

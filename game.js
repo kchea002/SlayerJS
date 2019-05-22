@@ -263,7 +263,8 @@ class Game {
 
         this.enemy.action = this.enemy.randomAction();
         this.player.armor = 0;
-        this.player.energy = 3;
+        this.player.energy = 3 + this.player.nextEnergyBonus;
+        this.player.nextEnergyBonus = 0;
         this.player.strength = 0;
         
         if (this.enemy.weakened > 0) {
