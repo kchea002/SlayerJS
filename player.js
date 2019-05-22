@@ -28,72 +28,13 @@ class Player {
         this.sCount = 19
 
         this.defendIds = ["d1", "d2", "d3"]
+        this.dCount = 10;
 
         this.playerIds = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"]
         this.pCount = 0
-        this.dCount = 10;
 
-    
-        // CARD AREA 1 LISTERNER
-        // const cardOne = new Path2D();
-        // cardOne.rect(460, 430, 180, 200);
-        // this.ctx.fill(cardOne);
-
-        // let canv = this.canvas.getBoundingClientRect();
-
-        // addEventListener("click", (event) => {
-            
-        //     if (this.ctx.isPointInPath(cardOne, event.clientX - canv.x, event.clientY - canv.y)) {
-        //         this.playCardOne(2);
-                
-        //     }
-        // })
-
-        // // CARD AREA 2 LISTERNER
-        // const cardTwo = new Path2D();
-        // cardTwo.rect(660, 430, 180, 200);
-        // this.ctx.fill(cardTwo);
-
-        // addEventListener("click", (event) => {
-        //     if (this.ctx.isPointInPath(cardTwo, event.clientX - canv.x, event.clientY - canv.y)) {
-        //         this.playCardOne(1);
-        //     }
-        // })
-
-        // // CARD AREA 3 LISTERNER
-        // const cardThree = new Path2D();
-        // cardThree.rect(860, 430, 180, 200);
-        // this.ctx.fill(cardThree);
-
-        // addEventListener("click", (event) => {
-        //     if (this.ctx.isPointInPath(cardThree, event.clientX - canv.x, event.clientY - canv.y)) {
-        //         this.playCardOne(0);
-        //     }
-        // })
-
-        // // CARD AREA 4 LISTERNER
-        // const cardFour = new Path2D();
-        // cardFour.rect(260, 430, 180, 200);
-        // // this.ctx.fillStyle = "black";
-        // this.ctx.fill(cardFour);
-
-        // addEventListener("click", (event) => {
-        //     if (this.ctx.isPointInPath(cardFour, event.clientX - canv.x, event.clientY - canv.y)) {
-        //         this.playCardOne(3);
-        //     }
-        // })
-
-        // const cardFive = new Path2D();
-        // cardFive.rect(60, 430, 180, 200);
-        // // this.ctx.fillStyle = "black";
-        // this.ctx.fill(cardFive);
-
-        // addEventListener("click", (event) => {
-        //     if (this.ctx.isPointInPath(cardFive, event.clientX - canv.x, event.clientY - canv.y)) {
-        //         this.playCardOne(4);
-        //     }
-        // })
-        
+        this.slashIds = ["t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12"]
+        this.aCount = 9
 
         this.drawCards = this.drawCards.bind(this)
     }
@@ -105,7 +46,9 @@ class Player {
             this.strengthAnimation()
         } else if (this.dCount < 10){ 
             this.defendAnimation()
-        } else {
+        } else if (this.aCount < 9) {
+            this.slashAnimation()
+        }else {
             this.playerAnimation()
         }
     
@@ -195,8 +138,9 @@ class Player {
             } else if (card.type === "metal") {
                 this.metalBonus += card.value
                 this.shieldSound.play()
-            }else if (card.type === "attack" || card.type === "clothesline") {
+            } else if (card.type === "attack" || card.type === "clothesline") {
                 this.graphic.attackAnimation()
+                this.aCount = 0
                 this.slashSound.play()
                 let totalAtk = card.value + this.strength;
                 if (this.enemy.weakened > 0) {
@@ -281,5 +225,21 @@ class Player {
 
     };
 
+    slashAnimation(){
+        this.aCount += 1
+
+        if (this.aCount < 9) {
+            if (this.aCount < 3) {
+                this.slashX = 100
+            } else {
+                this.slashX = 150
+            }
+        
+
+            let id = this.slashIds[this.aCount]
+            let img = document.getElementById(id);
+            this.ctx.drawImage(img, 350, 150, this.slashX, 150);
+        }
+    }
     
 }
