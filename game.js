@@ -115,7 +115,7 @@ class Game {
 
         const startPress = (event) => {
                 this.state = "instruction"
-                removeEventListener("click", startPress);
+                removeEventListener("keypress", startPress);
             }
 
         addEventListener("keypress", startPress );
@@ -134,7 +134,7 @@ class Game {
         const startPress2 = (event) => {
             this.state = "playMode"
             window.bgm.play()
-            removeEventListener("click", startPress2);
+            removeEventListener("keypress", startPress2);
         }
 
         addEventListener("keypress", startPress2);
@@ -395,12 +395,12 @@ class Game {
             //  this.ctx.fillStyle = "white"
             // this.ctx.fillText("PRESS ANY BUTTON TO GO BACK TO THE START SCREEN", 650, 500);
 
-            // const startPress = (event) => {
+            // const startPress3 = (event) => {
             //     this.state = "startScreen"
-                
-            //     removeEventListener("click", startPress);
+            //     new Game
+            //     removeEventListener("keypress", startPress3);
             //  }
-            // addEventListener("keypress", startPress);
+            // addEventListener("keypress", startPress3);
     }
 
 
