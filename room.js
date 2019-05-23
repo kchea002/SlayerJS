@@ -8,7 +8,7 @@ class Room {
         if (random <= 5) {
             this.enemy = new Knight(this.ctx, 1, 1); 
         } else {
-            this.enemy = new Scorpion(this.ctx, 1, 1); 
+            this.enemy = new Knight(this.ctx, 1, 1); 
         }
 
       

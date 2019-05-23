@@ -148,18 +148,15 @@ class Knight extends Enemy {
     }
 
     randomAction() {
-        let enemyActions = [
-            ["Atk", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
-            ["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
-            ["Atk", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+        if (this.armor === 0) {
+            let arr = [["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
             ["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
-            ["Bulwark Defense", Math.ceil(13 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
-        ];
-
-        this.shuffleArray(enemyActions);
-
-
-        return enemyActions[0];
+            ["Bulwark Defense", Math.ceil(13 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]];
+           return arr[Math.floor(Math.random() * 3)]
+        } else {
+            let res = ["Atk", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
+            return res;
+        }
     }
 
     animate() {

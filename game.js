@@ -115,7 +115,7 @@ class Game {
 
         this.ctx.font = "bold 16px Arial";
         this.ctx.fillStyle = "white"
-        this.ctx.fillText("Version 0.50", 30, 20);
+        this.ctx.fillText("Version 0.51", 30, 20);
 
         const startPress = (event) => {
                 this.state = "instruction"
@@ -339,7 +339,7 @@ class Game {
         this.room.turn += 1;
        this.enemy.armor = 0;
 
-        if (this.enemy.action[0] === "Atk") {
+        if (["Atk", "Poison Tail"].includes(this.enemy.action[0])) {
             if (this.player.armor >= this.enemy.action[1]) {
                 this.player.armor -= this.enemy.action[1];
             } else if (this.player.armor > 0) {
