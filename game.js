@@ -113,6 +113,10 @@ class Game {
         this.ctx.fillStyle = "white"
         this.ctx.fillText("PRESS ANY BUTTON TO BEGIN", 850, 600);
 
+        this.ctx.font = "bold 16px Arial";
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("Version 0.50", 30, 20);
+
         const startPress = (event) => {
                 this.state = "instruction"
                 removeEventListener("keypress", startPress);
