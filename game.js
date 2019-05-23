@@ -194,7 +194,7 @@ class Game {
 
         this.ctx.font = "italic 25px Arial";
         this.ctx.fillStyle = "white"
-        this.ctx.fillText("Heal for 8 HP", 500, 300);
+        this.ctx.fillText("Heal for " + (3 + this.room.level) + " HP", 500, 300);
 
         this.ctx.font = "italic 22px Arial";
         this.ctx.fillStyle = "white"
@@ -231,7 +231,7 @@ class Game {
         const rhp = (event) => {
             if (this.ctx.isPointInPath(rewardHp, event.clientX - canv.x, event.clientY - canv.y)) {
                 removeEventListener("click", rhp);
-                this.player.health += ( 5 + this.room.level) ;
+                this.player.health += ( 3 + this.room.level) ;
                 this.state = "playMode";
                 this.deck.reload();
                 this.player.drawCards();
