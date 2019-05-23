@@ -231,7 +231,7 @@ class Game {
         const rhp = (event) => {
             if (this.ctx.isPointInPath(rewardHp, event.clientX - canv.x, event.clientY - canv.y)) {
                 removeEventListener("click", rhp);
-                this.player.health += 8;
+                this.player.health += ( 5 + this.room.level) ;
                 this.state = "playMode";
                 this.deck.reload();
                 this.player.drawCards();

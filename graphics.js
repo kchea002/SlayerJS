@@ -27,9 +27,7 @@ class Graphic {
         this.enemyHeart();
         this.displayEnemyShield()
         this.displayTurnNumber();
-        console.log("DRAW CALLED", this.sCount)
         if (this.sCount < 19){
-            console.log("IVE BEEN CALLED", this.sCount)
             this.strengthAnimation()
         }
        

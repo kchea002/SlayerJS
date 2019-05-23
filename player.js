@@ -60,10 +60,37 @@ class Player {
             this.hand = new Hand(this.deck);
         } else {
             this.deck.reload()
-            debugger
-            // this.deck = new Deck
             this.hand = new Hand(this.deck);
         }
+        // if (this.deck.cards.length < 5 && this.deck.cards.length > 0 ) {
+        //     this.hand.hand = []
+        //     for (let index = 0; index < this.deck.cards.length + 1 ; index++) {
+        //         this.hand.hand.push(this.deck.cards.pop())
+
+        //         if (this.deck.cards.length === 0){
+        //             this.deck.reload()
+                
+        //             if (this.hand.hand.length < 5) {
+
+        //                 // for (let index = this.hand.hand.length ; index <= 0; index++) {
+        //                 //     this.hand.hand.push(this.deck.cards.pop())
+        //                 // }
+        //                 while (this.hand.hand.length < 5) {
+        //                     let popped2 = this.deck.cards.pop()
+        //                     this.hand.hand.push(popped2)
+        //                 }
+        //             }
+        //         } 
+                
+                
+        //     }
+        // } else if (this.deck.cards.length === 0) {
+        //     this.deck.reload()
+        //     this.hand = new Hand(this.deck);
+        // } else {
+        //     this.hand = new Hand(this.deck);
+
+        // }
     }
 
     showCards() {
@@ -195,10 +222,12 @@ class Player {
             let id = this.defendIds[this.dCount]
             let img = document.getElementById(id);
             this.ctx.drawImage(img, 350, 150, 100, 150);
-        } else {
+        } else if (this.dCount < 10) {
             let id = this.defendIds[2]
             let img = document.getElementById(id);
             this.ctx.drawImage(img, 350, 150, 100, 150);
+        } else {
+            this.dCount = 10;
         }
     
     }
@@ -239,6 +268,8 @@ class Player {
             let id = this.slashIds[this.aCount]
             let img = document.getElementById(id);
             this.ctx.drawImage(img, 350, 150, this.slashX, 150);
+        } else {
+            this.aCount = 9
         }
     }
     

@@ -3,7 +3,15 @@ class Room {
         this.ctx = ctx;
         this.level = 1;
         this.displayRoom()
-        this.enemy = new Enemy(this.ctx, 1, 1);
+
+        let random = Math.random() * 10
+        if (random <= 5) {
+            this.enemy = new Knight(this.ctx, 1, 1); 
+        } else {
+            this.enemy = new Scorpion(this.ctx, 1, 1); 
+        }
+
+      
         this.levelMult = 1
         this.actionMult = 1
         this.turn = 0;
@@ -24,7 +32,14 @@ class Room {
         this.level += 1;
         this.levelMult += 0.2;
         this.actionMult += 0.2;
-        this.enemy = new Enemy(this.ctx, this.levelMult, this.actionMult);
+
+        let random = Math.random() * 10
+        if (random <= 5) {
+            this.enemy = new Knight(this.ctx, 1, 1);
+        } else {
+            this.enemy = new Scorpion(this.ctx, 1, 1);
+        }
+        // this.enemy = new Knight(this.ctx, this.levelMult, this.actionMult);
         
     }
 

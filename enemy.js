@@ -6,7 +6,7 @@ class Enemy {
         this.actionMultiplier = mul2;
 
 
-        this.health = Math.floor(this.attributeMultiplier * (20 + ( Math.random() * 10)));
+        this.health = 0
         // this.health = 5;
         this.armor = 0;
         this.weakened = 0;
@@ -20,7 +20,9 @@ class Enemy {
         this.sy = 65;
 
         this.aCount = 0
-
+        this.kCount = 0
+        this.knightX = 85
+        this.knightSx = 10
     
         this.animate = this.animate.bind(this)
 
@@ -32,24 +34,24 @@ class Enemy {
         this.animate();
     }
 
-    randomAction() {
-        let enemyActions = [
-            ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3)))) ], 
-            ["Defend", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
-            ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
-            ["Defend", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
-        ];
+    // randomAction() {
+    //     let enemyActions = [
+    //         ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3)))) ], 
+    //         ["Defend", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
+    //         ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
+    //         ["Defend", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
+    //     ];
 
-        this.shuffleArray(enemyActions);
+    //     this.shuffleArray(enemyActions);
 
 
-        return enemyActions[0];
-    }
+    //     return enemyActions[0];
+    // }
 
     displayNextAction(){
         this.ctx.font = "25px Arial";
         this.ctx.fillStyle = "orange";   
-        this.ctx.fillText(this.action[0]+ ": " + this.action[1], 830, 220);
+        this.ctx.fillText(this.action[0]+ ": " + this.action[1], 830, 180);
 
         
     }
@@ -81,6 +83,14 @@ class Enemy {
 
     }
 
+}
+
+class Scorpion extends Enemy {
+    constructor(ctx, mul1, mul2){
+        super(ctx, mul1, mul2)
+
+        this.health = Math.floor(this.attributeMultiplier * (20 + (Math.random() * 10)));
+    }
 
     animate() {
         let img = document.getElementById("scorpion");
@@ -113,13 +123,63 @@ class Enemy {
         } else {
             this.ctx.drawImage(img, x, y, sx, sy, 800, 240, 180, 130)
         }
-       
-    
-        
-       
     }
-   
 
+    randomAction() {
+        let enemyActions = [
+            ["Atk", Math.ceil(7 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Defend", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Atk", Math.ceil(7 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Defend", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Poison Tail", Math.ceil(10 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
+        ];
+
+        this.shuffleArray(enemyActions);
+
+
+        return enemyActions[0];
+    }
+}
+
+class Knight extends Enemy {
+    constructor(ctx, mul1, mul2) {
+        super(ctx, mul1, mul2)
+        // this.health = 50;
+        this.health = this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
+    }
+
+    randomAction() {
+        let enemyActions = [
+            ["Atk", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Atk", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
+            ["Bulwark Defense", Math.ceil(13 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
+        ];
+
+        this.shuffleArray(enemyActions);
+
+
+        return enemyActions[0];
+    }
+
+    animate() {
+        let img = document.getElementById("knight");
+        this.kCount += 1
+        let sx = this.knightSx;
+        let x = this.knightX;
+
+        if (this.kCount < 16) {
+            this.ctx.drawImage(img, 360, 0, 75, 50, 760, 180, 210, 180)
+        } else {
+            this.ctx.drawImage(img, 434, 0, 75, 50, 760, 180, 210, 180)
+            if (this.kCount >= 32 ){
+                this.kCount = 0
+            }
+        }
+
+        
+    }
 }
 
 
