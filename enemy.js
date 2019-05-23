@@ -7,7 +7,6 @@ class Enemy {
 
 
         this.health = 0
-        // this.health = 5;
         this.armor = 0;
         this.weakened = 0;
 
@@ -144,7 +143,7 @@ class Scorpion extends Enemy {
 class Knight extends Enemy {
     constructor(ctx, mul1, mul2) {
         super(ctx, mul1, mul2)
-        // this.health = 50;
+
         this.health = this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
     }
 

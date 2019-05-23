@@ -35,9 +35,9 @@ class Room {
 
         let random = Math.random() * 10
         if (random <= 5) {
-            this.enemy = new Knight(this.ctx, 1, 1);
+            this.enemy = new Knight(this.ctx, this.levelMult, this.actionMult);
         } else {
-            this.enemy = new Scorpion(this.ctx, 1, 1);
+            this.enemy = new Scorpion(this.ctx, this.levelMult, this.actionMult);
         }
         // this.enemy = new Knight(this.ctx, this.levelMult, this.actionMult);
         
