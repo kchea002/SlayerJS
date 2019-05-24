@@ -282,6 +282,9 @@ class Game {
             }
         }
 
+        addEventListener("click", rhp);
+
+
         let loseCard = new Path2D();
         loseCard.rect(400, 440, 200, 100);
 
