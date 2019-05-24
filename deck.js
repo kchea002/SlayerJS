@@ -11,13 +11,13 @@ class Deck {
             // cardArr.push(new strengthCard);
 
         }
-
+        let stored = cardArr.slice() 
        
         
-        this.AllCards = cardArr.slice() 
+        this.AllCards = stored; 
         this.cards = this.shuffleArray(cardArr)
     
-
+        this.lastRemoved = null;
 
         this.shuffleArray = this.shuffleArray.bind(this);
         this.reload = this.reload.bind(this);
@@ -37,8 +37,12 @@ class Deck {
   
 
     reload(){
-        // this.cards = this.shuffleArray(this.AllCards)
         this.cards = this.shuffleArray(this.AllCards.slice())
+    }
+
+    remove(){
+        // this.shuffleArray(this.Allcards)
+        this.lastRemoved = this.AllCards.shift()
     }
 
     addCard(type){

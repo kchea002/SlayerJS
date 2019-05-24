@@ -145,6 +145,29 @@ class Game {
         addEventListener("keypress", startPress2);
     }
 
+    loseCard() {
+
+        this.ctx.fillStyle = "rgba(0,0,0,0.5)";
+        this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fill();
+
+        let id = this.deck.lastRemoved.type
+        let img = document.getElementById(id)
+        this.ctx.drawImage(img, 560, 200, 200, 200)
+
+        this.ctx.font = "bold 28px Arial";
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("REMOVED CARD", 660, 180);
+        this.ctx.fillText("PRESS ANY BUTTON TO CONTINUE", 650, 600);
+
+        const startPress3 = (event) => {
+            this.state = "playMode"
+            removeEventListener("keypress", startPress3);
+        }
+
+        addEventListener("keypress", startPress3);
+    }
+
 
 
     rootDraw(){
@@ -156,6 +179,8 @@ class Game {
             this.startScreen();
         } else if (this.state === "instruction") {
             this.instructionScreen();
+        } else if (this.state === "loseCard") {
+            this.loseCard();
         } else if (this.state === "playMode") {
             this.rain.draw();
             this.deckback();
@@ -170,7 +195,6 @@ class Game {
             this.rewardScreen();
         } else if (this.state === "loseScreen"){
             this.loseScreen();
-            
         }
            
         if (this.player.heath <= 0){
@@ -183,14 +207,16 @@ class Game {
 
         // let rect = this.ctx.rect(0, 0, 100, 100);
         // rect = this.ctx.fillStyle = "red";
-       
-        this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.fillStyle = "rgba(0,0,0,0.5)";
+
+        this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
         // this.ctx.fill();
 
         
         // this.ctx.fillRect(400, 200, 200, 200)
         // this.ctx.fillRect(700, 650, 450, 450)
+            // this.ctx.fillStyle = "white"
+        
         this.ctx.fillRect(330, 150, 650, 450)
         // this.ctx.fillStyle="white"
         this.ctx.fill();
@@ -199,7 +225,14 @@ class Game {
 
         this.ctx.font = "italic 25px Arial";
         this.ctx.fillStyle = "white"
-        this.ctx.fillText("Heal for " + (3 + this.room.level) + " HP", 650, 500);
+        this.ctx.fillText("CLICK HERE TO", 780, 500)
+        this.ctx.fillText("Heal for " + (3 + this.room.level) + " HP", 780, 540);
+
+        this.ctx.font = "italic 20px Arial";
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("CLICK HERE TO REMOVE", 500, 500)
+        this.ctx.fillText("A RANDOM CARD", 500, 540)
+
 
         this.ctx.font = "italic 22px Arial";
         this.ctx.fillStyle = "white"
@@ -211,7 +244,6 @@ class Game {
         this.ctx.fillText("CHOOSE YOUR REWARD", 650, 100);
 
         let x = 370
-        console.log("rewards", this.rewards)
 
         for (let index = 0; index < 3; index++) {
             let el = this.rewards[index]
@@ -248,20 +280,39 @@ class Game {
         let canv = this.canvas.getBoundingClientRect();
 
         let rewardHp = new Path2D();
-        rewardHp.rect(550, 400, 200, 200);
+        rewardHp.rect(680, 440, 200, 100);
 
         const rhp = (event) => {
             if (this.ctx.isPointInPath(rewardHp, event.clientX - canv.x, event.clientY - canv.y)) {
-                removeEventListener("click", rhp);
-                this.player.health += ( 3 + this.room.level) ;
-                this.state = "playMode";
-                this.deck.reload();
-                this.player.drawCards();
-                this.player.showCards();
+                if (this.state === "rewardScreen") {
+                    removeEventListener("click", rhp);
+                    this.player.health += (3 + this.room.level);
+                    this.state = "playMode";
+                    this.deck.reload();
+                    this.player.drawCards();
+                    this.player.showCards();
+                }
             }
         }
 
-        addEventListener("click", rhp );
+        let loseCard = new Path2D();
+        loseCard.rect(400, 440, 200, 100);
+
+        const lhp = (event) => {
+            if (this.ctx.isPointInPath(loseCard, event.clientX - canv.x, event.clientY - canv.y)) {
+                if (this.state === "rewardScreen") {
+                    removeEventListener("click", lhp);
+                    this.state = "loseCard";
+                    this.deck.remove()
+                    console.log(this.deck.length)
+                    this.deck.reload();
+                    this.player.drawCards();
+                    this.player.showCards();
+                }
+            }
+        }
+
+        addEventListener("click", lhp );
         
         let rewardStr = new Path2D();
         rewardStr.rect(570, 220, 170, 170);
