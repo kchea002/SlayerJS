@@ -1,5 +1,7 @@
 class Game {
     constructor(canvas) {
+        this.version = "Version 0.53"
+
         this.canvas = document.getElementById(canvas);
         this.ctx = this.canvas.getContext("2d");
 
@@ -116,7 +118,7 @@ class Game {
 
         this.ctx.font = "bold 16px Arial";
         this.ctx.fillStyle = "white"
-        this.ctx.fillText("Version 0.52", 30, 20);
+        this.ctx.fillText(this.version, 30, 20);
 
         const startPress = (event) => {
                 this.state = "instruction"
