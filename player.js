@@ -160,7 +160,7 @@ class Player {
                     this.strength += card.value;
                     this.sCount = 0
             } else if (card.type === "bloodletting") {
-                this.health += card.value
+                // this.health += card.value
                 this.nextEnergyBonus += 1
             } else if (card.type === "metal") {
                 this.metalBonus += card.value

@@ -18,6 +18,7 @@ class Game {
         this.graphic = new Graphic(this.ctx, this.player, this.room)
         this.rain = new Rain(this.ctx, this.canvas, this.graphic)
 
+        this.rewards = ["strength", "heal", "clothesline", "bloodletting", "metal"]
 
         
         this.player.showCards();
@@ -115,7 +116,7 @@ class Game {
 
         this.ctx.font = "bold 16px Arial";
         this.ctx.fillStyle = "white"
-        this.ctx.fillText("Version 0.51", 30, 20);
+        this.ctx.fillText("Version 0.52", 30, 20);
 
         const startPress = (event) => {
                 this.state = "instruction"
@@ -189,8 +190,8 @@ class Game {
 
         
         // this.ctx.fillRect(400, 200, 200, 200)
-        this.ctx.fillRect(700, 150, 450, 450)
-        this.ctx.fillRect(150, 150, 450, 450)
+        // this.ctx.fillRect(700, 650, 450, 450)
+        this.ctx.fillRect(330, 150, 650, 450)
         // this.ctx.fillStyle="white"
         this.ctx.fill();
 
@@ -198,39 +199,56 @@ class Game {
 
         this.ctx.font = "italic 25px Arial";
         this.ctx.fillStyle = "white"
-        this.ctx.fillText("Heal for " + (3 + this.room.level) + " HP", 500, 300);
+        this.ctx.fillText("Heal for " + (3 + this.room.level) + " HP", 650, 500);
 
         this.ctx.font = "italic 22px Arial";
         this.ctx.fillStyle = "white"
-        this.ctx.fillText("Add a new card to your deck", 920, 200);
+        this.ctx.fillText("Add a new card to your deck", 650, 200);
         
 
         this.ctx.font = "bold 30px Arial";
         this.ctx.fillStyle = "white"
         this.ctx.fillText("CHOOSE YOUR REWARD", 650, 100);
 
-        let img = document.getElementById("strength")
-        this.ctx.drawImage(img, 740, 220, 170, 170)
+        let x = 370
+        console.log("rewards", this.rewards)
 
-        let img2 = document.getElementById("heal")
-        this.ctx.drawImage(img2, 940, 220, 170, 170)
+        for (let index = 0; index < 3; index++) {
+            let el = this.rewards[index]
+            let img5 = document.getElementById(el)
+            this.ctx.drawImage(img5, x, 220, 170, 170)
+            x += 200
+        }
 
-        let img3 = document.getElementById("clothesline")
-        this.ctx.drawImage(img3, 940, 420, 170, 170)
+        // let img = document.getElementById("strength")
+        // this.ctx.drawImage(img, 740, 220, 170, 170)
 
-        let img4 = document.getElementById("bloodletting")
-        this.ctx.drawImage(img4, 740, 420, 170, 170)
+        // let img2 = document.getElementById("heal")
+        // this.ctx.drawImage(img2, 940, 220, 170, 170)
 
-        let img5 = document.getElementById("metal")
-        this.ctx.drawImage(img5, 400, 420, 170, 170)
+        // let img3 = document.getElementById("clothesline")
+        // this.ctx.drawImage(img3, 940, 420, 170, 170)
 
+        // let img4 = document.getElementById("bloodletting")
+        // this.ctx.drawImage(img4, 740, 420, 170, 170)
+
+        // let img5 = document.getElementById("metal")
+        // this.ctx.drawImage(img5, 400, 420, 170, 170)
+
+    }
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 
     rewardEL(){
         let canv = this.canvas.getBoundingClientRect();
 
         let rewardHp = new Path2D();
-        rewardHp.rect(400, 200, 200, 200);
+        rewardHp.rect(550, 400, 200, 200);
 
         const rhp = (event) => {
             if (this.ctx.isPointInPath(rewardHp, event.clientX - canv.x, event.clientY - canv.y)) {
@@ -246,11 +264,11 @@ class Game {
         addEventListener("click", rhp );
         
         let rewardStr = new Path2D();
-        rewardStr.rect(740, 220, 170, 170);
+        rewardStr.rect(570, 220, 170, 170);
         const rc1e = (event) => {
             if (this.state === "rewardScreen") {
                 if (this.ctx.isPointInPath(rewardStr, event.clientX - canv.x, event.clientY - canv.y)) {
-                    this.deck.addCard("strength")
+                    this.deck.addCard(this.rewards[1])
                     this.state = "playMode";
                     this.deck.reload();
                     this.player.drawCards();
@@ -261,11 +279,11 @@ class Game {
         addEventListener("click", rc1e);
 
         let rewardHeal = new Path2D();
-        rewardHeal.rect(940, 220, 170, 170);
+        rewardHeal.rect(770, 220, 170, 170);
         const rc2e = (event) => {
             if (this.state === "rewardScreen") {
                 if (this.ctx.isPointInPath(rewardHeal, event.clientX - canv.x, event.clientY - canv.y)) {
-                    this.deck.addCard("heal")
+                    this.deck.addCard(this.rewards[2])
                     this.state = "playMode";
                     this.deck.reload();
                     this.player.drawCards();
@@ -276,11 +294,11 @@ class Game {
         addEventListener("click", rc2e);
 
         let rewardClothesline = new Path2D();
-        rewardClothesline.rect(940, 420, 170, 170);
+        rewardClothesline.rect(370, 220, 170, 170);
         const rc3e = (event) => {
             if (this.state === "rewardScreen") {
                 if (this.ctx.isPointInPath(rewardClothesline, event.clientX - canv.x, event.clientY - canv.y)) {
-                    this.deck.addCard("clothesline")
+                    this.deck.addCard(this.rewards[0])
                     this.state = "playMode";
                     this.deck.reload();
                     this.player.drawCards();
@@ -290,35 +308,35 @@ class Game {
         }
         addEventListener("click", rc3e);
 
-        let rewardBloodletting = new Path2D();
-        rewardBloodletting.rect(740, 420, 170, 170);
-        const rc4e = (event) => {
-            if (this.state === "rewardScreen") {
-                if (this.ctx.isPointInPath(rewardBloodletting, event.clientX - canv.x, event.clientY - canv.y)) {
-                    this.deck.addCard("bloodletting");
-                    this.state = "playMode";
-                    this.deck.reload();
-                    this.player.drawCards();
-                    this.player.showCards();
-                }
-            }
-        }
-        addEventListener("click", rc4e);
+        // let rewardBloodletting = new Path2D();
+        // rewardBloodletting.rect(740, 420, 170, 170);
+        // const rc4e = (event) => {
+        //     if (this.state === "rewardScreen") {
+        //         if (this.ctx.isPointInPath(rewardBloodletting, event.clientX - canv.x, event.clientY - canv.y)) {
+        //             this.deck.addCard("bloodletting");
+        //             this.state = "playMode";
+        //             this.deck.reload();
+        //             this.player.drawCards();
+        //             this.player.showCards();
+        //         }
+        //     }
+        // }
+        // addEventListener("click", rc4e);
 
-        let rewardMetal = new Path2D();
-        rewardMetal.rect(440, 420, 170, 170);
-        const rc5e = (event) => {
-            if (this.state === "rewardScreen") {
-                if (this.ctx.isPointInPath(rewardMetal, event.clientX - canv.x, event.clientY - canv.y)) {
-                    this.deck.addCard("metal");
-                    this.state = "playMode";
-                    this.deck.reload();
-                    this.player.drawCards();
-                    this.player.showCards();
-                }
-            }
-        }
-        addEventListener("click", rc5e);
+        // let rewardMetal = new Path2D();
+        // rewardMetal.rect(440, 420, 170, 170);
+        // const rc5e = (event) => {
+        //     if (this.state === "rewardScreen") {
+        //         if (this.ctx.isPointInPath(rewardMetal, event.clientX - canv.x, event.clientY - canv.y)) {
+        //             this.deck.addCard("metal");
+        //             this.state = "playMode";
+        //             this.deck.reload();
+        //             this.player.drawCards();
+        //             this.player.showCards();
+        //         }
+        //     }
+        // }
+        // addEventListener("click", rc5e);
 
      
 
@@ -330,6 +348,7 @@ class Game {
         if (this.player.health <= 0) {
             this.state = "loseScreen";
         } else if (this.enemy.health <= 0) {
+            this.shuffleArray(this.rewards)
             this.state = "rewardScreen";
             this.rewardEL()
             this.turnReset();

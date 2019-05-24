@@ -48,8 +48,8 @@ class bloodletting {
     constructor() {
         this.img = document.getElementById("bloodletting");
         this.type = "bloodletting";
-        this.value = -3;
-        this.cost = 0;
+        // this.value = -3;
+        this.cost = 1;
     }
 }
 
