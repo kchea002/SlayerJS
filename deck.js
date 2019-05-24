@@ -56,6 +56,8 @@ class Deck {
             this.AllCards.push(new bloodletting)
         } else if (type === "metal") {
             this.AllCards.push(new metalCard)
+        } else if (type === "barricade") {
+            this.AllCards.push(new barricade)
         }
     }
 

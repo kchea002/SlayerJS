@@ -18,6 +18,7 @@ class Player {
         this.strength = 0;
         this.nextEnergyBonus = 0;
         this.metalBonus = 0
+        this.barricadeOn = false
 
         this.slashSound = document.getElementById("slash");
         this.shieldSound = document.getElementById("shieldsound");
@@ -160,8 +161,10 @@ class Player {
                     this.strength += card.value;
                     this.sCount = 0
             } else if (card.type === "bloodletting") {
-                // this.health += card.value
                 this.nextEnergyBonus += 1
+            } else if (card.type === "barricade") {
+                this.barricadeOn = true
+                this.shieldSound.play()
             } else if (card.type === "metal") {
                 this.metalBonus += card.value
                 this.shieldSound.play()

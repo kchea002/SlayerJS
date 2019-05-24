@@ -1,6 +1,6 @@
 class Game {
     constructor(canvas) {
-        this.version = "Version 0.53"
+        this.version = "Version 0.54"
 
         this.canvas = document.getElementById(canvas);
         this.ctx = this.canvas.getContext("2d");
@@ -20,7 +20,7 @@ class Game {
         this.graphic = new Graphic(this.ctx, this.player, this.room)
         this.rain = new Rain(this.ctx, this.canvas, this.graphic)
 
-        this.rewards = ["strength", "heal", "clothesline", "bloodletting", "metal"]
+        this.rewards = ["strength", "heal", "clothesline", "bloodletting", "metal", "barricade"]
 
         
         this.player.showCards();
@@ -254,21 +254,6 @@ class Game {
             x += 200
         }
 
-        // let img = document.getElementById("strength")
-        // this.ctx.drawImage(img, 740, 220, 170, 170)
-
-        // let img2 = document.getElementById("heal")
-        // this.ctx.drawImage(img2, 940, 220, 170, 170)
-
-        // let img3 = document.getElementById("clothesline")
-        // this.ctx.drawImage(img3, 940, 420, 170, 170)
-
-        // let img4 = document.getElementById("bloodletting")
-        // this.ctx.drawImage(img4, 740, 420, 170, 170)
-
-        // let img5 = document.getElementById("metal")
-        // this.ctx.drawImage(img5, 400, 420, 170, 170)
-
     }
 
     shuffleArray(array) {
@@ -425,7 +410,11 @@ class Game {
         }
 
         this.enemy.action = this.enemy.randomAction();
-        this.player.armor = 0 + this.player.metalBonus;
+        if (this.player.barricadeOn === true && this.player.armor > 0) {
+            this.player.armor += this.player.metalBonus;
+        } else {
+            this.player.armor = 0 + this.player.metalBonus;
+        }
         this.player.energy = 3 + this.player.nextEnergyBonus;
         this.player.nextEnergyBonus = 0;
         this.player.strength = 0;
@@ -445,6 +434,7 @@ class Game {
         this.player.strength = 0;
         this.player.nextEnergyBonus = 0
         this.player.metalBonus = 0
+        this.player.barricadeOn = false;
         this.room.turn = 1;
         this.room.nextLevel();
         this.enemy = this.room.enemy;

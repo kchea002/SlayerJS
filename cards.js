@@ -61,3 +61,11 @@ class metalCard {
         this.cost = 3;
     }
 }
+
+class barricade {
+    constructor() {
+        this.img = document.getElementById("barricade");
+        this.type = "barricade";
+        this.cost = 3;
+    }
+}
