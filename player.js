@@ -139,7 +139,10 @@ class Player {
             this.ctx.fillText(this.metalBonus, 495, 200);
         }
         
-        
+        if (this.barricadeOn === true) {
+            let img = document.getElementById("brick");
+            this.ctx.drawImage(img, 450, 310, 40, 40);
+        }
 
     }
 
