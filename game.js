@@ -301,7 +301,7 @@ class Game {
         this.ctx.font = "italic 25px Arial";
         this.ctx.fillStyle = "white"
         this.ctx.fillText("CLICK HERE TO", 780, 500)
-        this.ctx.fillText("Heal for " + (3 + this.room.level) + " HP", 780, 540);
+        this.ctx.fillText("Heal for " + (4 + this.room.level) + " HP", 780, 540);
 
         this.ctx.font = "italic 20px Arial";
         this.ctx.fillStyle = "white"

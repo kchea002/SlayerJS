@@ -22,6 +22,9 @@ class Enemy {
         this.kCount = 0
         this.knightX = 85
         this.knightSx = 10
+
+        this.bossX = 0
+        this.bCount = 0
     
         this.barricadeOn = false
 
@@ -94,6 +97,7 @@ class Scorpion extends Enemy {
     constructor(ctx, mul1, mul2){
         super(ctx, mul1, mul2)
 
+        this.action = ["Poison Tail", 0]
         this.health = Math.floor(this.attributeMultiplier * (20 + (Math.random() * 10)));
         // this.health = 5
 
@@ -133,12 +137,13 @@ class Scorpion extends Enemy {
     }
 
     randomAction() {
+
+        
         let enemyActions = [
             ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
             ["Defend", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
             ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
-            ["Defend", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
-            ["Poison Tail", 0]
+            ["Defend", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
         ];
 
         this.shuffleArray(enemyActions);
@@ -154,7 +159,7 @@ class Knight extends Enemy {
 
         this.action = ["Barricade", 0]
         this.barricadeOn = false 
-        this.health = this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
+        this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
         // this.health = 5
     }
 
@@ -190,9 +195,57 @@ class Knight extends Enemy {
         }
 
         
+    }}
+
+
+class Boss extends Enemy {
+    constructor(ctx, mul1, mul2) {
+        super(ctx, mul1, mul2);
+
+        this.action = this.randomAction();
+        this.barricadeOn = true;
+        this.health = this.health = Math.floor(this.attributeMultiplier * (50 + (Math.random() * 10)));
+        // this.health = 5
+    }
+
+    randomAction() {
+        if (this.barricadeOn === false) {
+            this.barricadeOn = true;
+        }
+        // return ["Barricade", 0]
+        if (this.armor === 0) {
+            let arr = [["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]]
+            return arr[Math.floor(Math.random() * 3)];
+        } else {
+            let res = ["Atk", Math.ceil(10 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
+            return res;
+        }
+    }
+
+    animate() {
+        let img = document.getElementById("boss");
+        this.bCount += 1
+        // let sx = this.knightSx;
+        let x = this.bossX;
+
+        // this.ctx.drawImage(img, x, 0, 122, 110, 760, 180, 210, 180)
+
+
+        if (this.bCount === 3) {
+            this.ctx.drawImage(img, x, 0, 122, 110, 760, 180, 210, 180)
+            this.bossX += 122
+        } else {
+            this.ctx.drawImage(img, x, 0, 122, 110, 760, 180, 210, 180)
+            if (this.bCount >= 11) {
+                this.bCount = 0
+                this.bossX = 0
+            }
+        }
+
+
     }
 }
-
 
 
 

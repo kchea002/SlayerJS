@@ -1,5 +1,6 @@
+
 class Room {
-    constructor(ctx){
+    constructor(ctx) {
         this.ctx = ctx;
         this.level = 1;
         this.displayRoom()
@@ -10,6 +11,7 @@ class Room {
         } else {
             this.enemy = new Knight(this.ctx, 1, 1); 
         }
+        // this.enemy = new Scorpion(this.ctx, 1, 1);
 
       
         this.levelMult = 1
@@ -30,8 +32,8 @@ class Room {
 
     nextLevel(){
         this.level += 1;
-        this.levelMult += 0.2;
-        this.actionMult += 0.2;
+        this.levelMult += 0.15;
+        this.actionMult += 0.1;
 
         let random = Math.random() * 10
         if (random <= 5) {
