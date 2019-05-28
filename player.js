@@ -156,7 +156,11 @@ class Player {
                 this.shieldSound.play()
                 this.dCount = 0
             } else if (card.type === "heal") {
-                this.health += card.value; 
+                if ((this.health + 5) < (30 + (5 * this.room.level))) {
+                    this.health += card.value; 
+                } else {
+                    this.health = (30 + (5 * this.room.level));
+                }
             } else if (card.type === "strength") {
                     this.strength += card.value;
                     this.sCount = 0

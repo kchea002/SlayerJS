@@ -88,8 +88,8 @@ class Scorpion extends Enemy {
     constructor(ctx, mul1, mul2){
         super(ctx, mul1, mul2)
 
-        this.health = Math.floor(this.attributeMultiplier * (20 + (Math.random() * 10)));
-        // this.health = 5
+        // this.health = Math.floor(this.attributeMultiplier * (20 + (Math.random() * 10)));
+        this.health = 5
 
     }
 
@@ -146,8 +146,8 @@ class Knight extends Enemy {
     constructor(ctx, mul1, mul2) {
         super(ctx, mul1, mul2)
 
-        this.health = this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
-        // this.health = 5
+        // this.health = this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
+        this.health = 5
     }
 
     randomAction() {
