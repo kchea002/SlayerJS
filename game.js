@@ -12,7 +12,9 @@ class Game {
         
         this.room = new Room(this.ctx)
         this.enemy = this.room.enemy;
-      
+        this.scores = {}
+
+    
 
         this.deck = new Deck()
         this.player = new Player(this.ctx, this.enemy, this.canvas, this.room, this.deck, this.state);
@@ -22,6 +24,7 @@ class Game {
 
         this.rewards = ["strength", "heal", "clothesline", "bloodletting", "metal", "barricade"]
 
+        // this.Score = (this.room.level * 1000) + (this.room.turn * 10)
         
         this.player.showCards();
         this.eCount = 10
@@ -31,6 +34,7 @@ class Game {
         this.endTurnListener = this.endTurnListener.bind(this)
         this.rootDraw = this.rootDraw.bind(this);
         this.turnReset = this.turnReset.bind(this);
+        this.enemyTurn = this.enemyTurn.bind(this);
 
         this.rootDraw();
 
@@ -106,6 +110,10 @@ class Game {
 
     }
 
+    finalScore(){
+        this.finalScore = (this.room.level * 1000) + (this.room.turn * 10)
+    }
+
     startScreen(){
        
 
@@ -173,7 +181,7 @@ class Game {
 
 
     rootDraw(){
-        // FPS TIMER at 7 FPS
+        // FPS TIMER at 15 FPS
         setTimeout(() => { requestAnimationFrame(this.rootDraw);}, 1000/15); 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); 
 
@@ -387,6 +395,16 @@ class Game {
     enemyTurn(){
        
         if (this.player.health <= 0) {
+            window.fetch('/players')
+                            .then((response) => {
+                                return response.json();
+                            })
+                            .then((myJson) => {
+                                let object = myJson["msg"]
+                                this.scores = object                               
+                            });
+            this.finalScore()              
+            this.leaderboard()                
             this.state = "loseScreen";
         } else if (this.enemy.health <= 0) {
             this.shuffleArray(this.rewards)
@@ -431,6 +449,42 @@ class Game {
         // setTimeout(this.endEnemyTurn(), 3000);
     }
 
+    leaderboard(){
+        const submit = document.getElementById("submitButton")
+        const leaderboard = document.getElementById("leaderboard")
+        leaderboard.style.display = "flex";
+        
+
+        submit.addEventListener("click",  () => {
+            let name = document.getElementById("input").value
+            postData('/players', name , this.finalScore)
+            leaderboard.style.display = "none";
+            location.reload()
+            // window.fetch('/players')
+            //     .then((response) => {
+            //         return response.json();
+            //     })
+            //     .then((myJson) => {
+            //         let object = myJson["msg"]
+            //         this.scores = object
+            //     });
+        });
+
+
+        function postData(url = '/players', name, score) {
+            // Default options are marked with *
+            return fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: name, score: score })
+                // body data type must match "Content-Type" header
+            })
+                .then(response => response.json()); // parses JSON response into native Javascript objects 
+        }
+    }
+
     turnReset(){
         this.player.energy = 3;
         this.player.armor = 0;
@@ -451,23 +505,34 @@ class Game {
             this.ctx.fillStyle = "rgba(0,0,0,0.5)";
             this.ctx.fill() 
 
+            this.ctx.font = "bold italic 40 Arial";
+            this.ctx.fillStyle = "red"
+            this.ctx.fillText("Leaderboard", 1000, 70);
+
             this.ctx.font = "bold italic 50px Arial";
             this.ctx.fillStyle = "white"
-            this.ctx.fillText("Try Again?", 650, 200);
+            this.ctx.fillText("Try Again?", 650, 130);
 
             this.ctx.font = "bold italic 40px Arial";
             this.ctx.fillStyle = "white"
-            this.ctx.fillText("Final Area: "+ this.room.level, 650, 300);
+            this.ctx.fillText("Final Area: "+ this.room.level, 650, 180);
+            this.ctx.fillText("score: " + this.finalScore, 650, 230);
+
             
+            let y = 120
+            this.scores.map( score => {
+                this.ctx.font = "22px Arial";
+                this.ctx.fillText(score.username + " " + score.score, 1000, y);
+                y += 40
+            })
 
             //  this.ctx.font = "bold 28px Arial";
             //  this.ctx.fillStyle = "white"
             // this.ctx.fillText("PRESS ANY BUTTON TO GO BACK TO THE START SCREEN", 650, 500);
 
             // const startPress3 = (event) => {
-            //     this.state = "startScreen"
-            //     new Game
-            //     removeEventListener("keypress", startPress3);
+            //     location.reload()
+            //     // removeEventListener("keypress", startPress3);
             //  }
             // addEventListener("keypress", startPress3);
     }
@@ -558,13 +623,18 @@ class Game {
     }
 
 
+
+
     
    
 }
 
 window.onload = function() {
     const game = new Game("game-canvas");
-    
+
+
+
+
 }
 
 

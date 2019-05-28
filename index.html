@@ -110,10 +110,13 @@
 
 <body>
     
+
+
     <div id="center-div">
 
-        <h1>Slayer</h1>
+        <h1>SlayerJS</h1>
 
+      
         <canvas id="game-canvas" width="1300" height="645"> 
         </canvas>
         <div class="ui-sound">
@@ -137,7 +140,6 @@
             const playButton = document.getElementById("play");
             const pauseButton = document.getElementById("pause");
             const muteButton = document.getElementById("mute");
-            
 
         
 
@@ -163,11 +165,20 @@
                     volumeButton.style.display = "inline";
                 });
 
+             
                 
 
 
 
         </script>
+
+        <div id="leaderboard" >
+                <input id="input" type="text" name="username" placeholder="Enter name here">
+                <button id="submitButton" type="submit"  >Submit </button>
+    
+        </div>
+
+         
     </div>
 
 </body>
