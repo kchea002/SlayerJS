@@ -23,6 +23,8 @@ class Enemy {
         this.knightX = 85
         this.knightSx = 10
     
+        this.barricadeOn = false
+
         this.animate = this.animate.bind(this)
 
     }
@@ -79,6 +81,10 @@ class Enemy {
             this.ctx.fillText("Weak: " + this.weakened, 920, 200);
         }
         
+        if (this.barricadeOn === true) {
+            let img = document.getElementById("brick");
+            this.ctx.drawImage(img, 920, 340, 40, 40);
+        }
 
     }
 
@@ -128,11 +134,11 @@ class Scorpion extends Enemy {
 
     randomAction() {
         let enemyActions = [
-            ["Atk", Math.ceil(7 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
             ["Defend", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
-            ["Atk", Math.ceil(7 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
             ["Defend", Math.ceil(4 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
-            ["Poison Tail", Math.ceil(10 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
+            ["Poison Tail", 0]
         ];
 
         this.shuffleArray(enemyActions);
@@ -146,12 +152,18 @@ class Knight extends Enemy {
     constructor(ctx, mul1, mul2) {
         super(ctx, mul1, mul2)
 
+        this.action = ["Barricade", 0]
+        this.barricadeOn = false 
         this.health = this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
         // this.health = 5
     }
 
     randomAction() {
-        if (this.armor === 0) {
+        if (this.barricadeOn === false) {
+            this.barricadeOn = true 
+        }
+            // return ["Barricade", 0]
+         if (this.armor === 0) {
             let arr = [["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
             ["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
             ["Bulwark Defense", Math.ceil(13 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]];

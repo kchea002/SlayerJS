@@ -19,6 +19,7 @@ class Player {
         this.nextEnergyBonus = 0;
         this.metalBonus = 0
         this.barricadeOn = false
+        this.poisoned = 0;
 
         this.slashSound = document.getElementById("slash");
         this.shieldSound = document.getElementById("shieldsound");
@@ -142,6 +143,12 @@ class Player {
         if (this.barricadeOn === true) {
             let img = document.getElementById("brick");
             this.ctx.drawImage(img, 450, 310, 40, 40);
+        }
+
+        if (this.poisoned > 0) {
+            this.ctx.font = "bold italic 19px Arial";
+            this.ctx.fillStyle = "red"
+            this.ctx.fillText("Poisoned: " + this.poisoned, 450, 140);
         }
 
     }

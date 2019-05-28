@@ -1,6 +1,6 @@
 class Game {
     constructor(canvas) {
-        this.version = "Version 0.56"
+        this.version = "Version 0.58"
 
         this.canvas = document.getElementById(canvas);
         this.ctx = this.canvas.getContext("2d");
@@ -23,8 +23,6 @@ class Game {
         this.rain = new Rain(this.ctx, this.canvas, this.graphic)
 
         this.rewards = ["strength", "heal", "clothesline", "bloodletting", "metal", "barricade"]
-
-        // this.Score = (this.room.level * 1000) + (this.room.turn * 10)
         
         this.player.showCards();
         this.eCount = 10
@@ -107,8 +105,75 @@ class Game {
                 }
             }
         })
-
     }
+
+    enemyTurn() {
+        // WHEN PLAYER DIES
+        if (this.player.health <= 0) {
+            window.fetch('/players')
+                .then((response) => {
+                    return response.json();
+                })
+                .then((myJson) => {
+                    let object = myJson["msg"]
+                    this.scores = object
+                });
+            this.finalScore()
+            this.leaderboard()
+            this.state = "loseScreen";
+        // WHEN PLAYER KILLS AN ENEMY
+        } else if (this.enemy.health <= 0) {
+            this.shuffleArray(this.rewards)
+            this.state = "rewardScreen";
+            this.rewardEL()
+            this.turnReset();
+            return true;
+        }
+
+        this.room.turn += 1;
+        if (this.enemy.barricadeOn === false || this.enemy.armor < 0) {
+            this.enemy.armor = 0;
+        }
+
+        if (this.player.poisoned > 0) {
+            this.player.health -= 3;
+            this.player.poisoned -= 1;
+        }
+
+        if (["Atk"].includes(this.enemy.action[0])) {
+            if (this.player.armor >= this.enemy.action[1]) {
+                this.player.armor -= this.enemy.action[1];
+            } else if (this.player.armor > 0) {
+                this.player.armor -= this.enemy.action[1];
+                this.player.health += this.player.armor;
+            } else {
+                this.player.health -= this.enemy.action[1];
+            }
+        } else if (["Poison Tail"].includes(this.enemy.action[0])) {
+            this.player.poisoned = 3;
+        } else {
+            this.enemy.armor += this.enemy.action[1];
+        }
+
+        this.enemy.action = this.enemy.randomAction();
+        if (this.player.barricadeOn === true && this.player.armor > 0) {
+            this.player.armor += this.player.metalBonus;
+        } else {
+            this.player.armor = 0 + this.player.metalBonus;
+        }
+        this.player.energy = 3 + this.player.nextEnergyBonus;
+        this.player.nextEnergyBonus = 0;
+        this.player.strength = 0;
+
+        if (this.enemy.weakened > 0) {
+            this.enemy.weakened -= 1;
+        }
+
+        this.player.playTurn();
+
+        // setTimeout(this.endEnemyTurn(), 3000);
+    }
+
 
     finalScore(){
         this.finalScore = (this.room.level * 1000) + (this.room.turn * 10)
@@ -391,63 +456,6 @@ class Game {
 
     }
     
-    
-    enemyTurn(){
-       
-        if (this.player.health <= 0) {
-            window.fetch('/players')
-                            .then((response) => {
-                                return response.json();
-                            })
-                            .then((myJson) => {
-                                let object = myJson["msg"]
-                                this.scores = object                               
-                            });
-            this.finalScore()              
-            this.leaderboard()                
-            this.state = "loseScreen";
-        } else if (this.enemy.health <= 0) {
-            this.shuffleArray(this.rewards)
-            this.state = "rewardScreen";
-            this.rewardEL()
-            this.turnReset();
-            return true;
-        }
-
-        this.room.turn += 1;
-       this.enemy.armor = 0;
-
-        if (["Atk", "Poison Tail"].includes(this.enemy.action[0])) {
-            if (this.player.armor >= this.enemy.action[1]) {
-                this.player.armor -= this.enemy.action[1];
-            } else if (this.player.armor > 0) {
-                this.player.armor -= this.enemy.action[1];
-                this.player.health += this.player.armor;
-            } else {
-                this.player.health -= this.enemy.action[1];
-            }
-        } else {
-            this.enemy.armor += this.enemy.action[1];
-        }
-
-        this.enemy.action = this.enemy.randomAction();
-        if (this.player.barricadeOn === true && this.player.armor > 0) {
-            this.player.armor += this.player.metalBonus;
-        } else {
-            this.player.armor = 0 + this.player.metalBonus;
-        }
-        this.player.energy = 3 + this.player.nextEnergyBonus;
-        this.player.nextEnergyBonus = 0;
-        this.player.strength = 0;
-        
-        if (this.enemy.weakened > 0) {
-            this.enemy.weakened -= 1;
-        }
-
-        this.player.playTurn();
-        
-        // setTimeout(this.endEnemyTurn(), 3000);
-    }
 
     leaderboard(){
         const submit = document.getElementById("submitButton")
@@ -492,6 +500,7 @@ class Game {
         this.player.nextEnergyBonus = 0
         this.player.metalBonus = 0
         this.player.barricadeOn = false;
+        this.player.poisoned = 0
         this.room.turn = 1;
         this.room.nextLevel();
         this.enemy = this.room.enemy;

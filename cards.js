@@ -57,8 +57,8 @@ class metalCard {
     constructor() {
         this.img = document.getElementById("metal");
         this.type = "metal";
-        this.value = 2;
-        this.cost = 3;
+        this.value = 3;
+        this.cost = 2;
     }
 }
 
