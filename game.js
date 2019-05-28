@@ -1,6 +1,6 @@
 class Game {
     constructor(canvas) {
-        this.version = "Version 0.58"
+        this.version = "Version 0.581"
 
         this.canvas = document.getElementById(canvas);
         this.ctx = this.canvas.getContext("2d");
