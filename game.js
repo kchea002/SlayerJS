@@ -1,6 +1,6 @@
 class Game {
     constructor(canvas) {
-        this.version = "Version 0.581"
+        this.version = "Version 0.60"
 
         this.canvas = document.getElementById(canvas);
         this.ctx = this.canvas.getContext("2d");
@@ -257,6 +257,7 @@ class Game {
         } else if (this.state === "loseCard") {
             this.loseCard();
         } else if (this.state === "playMode") {
+            this.background();
             this.rain.draw();
             this.deckback();
             this.graphic.draw();
@@ -267,14 +268,21 @@ class Game {
                 this.enemyTurnBanner()
             }
         } else if (this.state === "rewardScreen"){
+            this.background();
             this.rewardScreen();
         } else if (this.state === "loseScreen"){
+            this.background();
             this.loseScreen();
         }
            
         if (this.player.heath <= 0){
             this.loseScreen();
         }
+    }
+
+    background(){
+        let img = document.getElementById("forest")
+        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
     }
 
     rewardScreen(){

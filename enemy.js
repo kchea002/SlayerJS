@@ -204,7 +204,7 @@ class Boss extends Enemy {
 
         this.action = this.randomAction();
         this.barricadeOn = true;
-        this.health = this.health = Math.floor(this.attributeMultiplier * (50 + (Math.random() * 10)));
+        this.health = this.health = Math.floor(this.attributeMultiplier * (40 + (Math.random() * 10)));
         // this.health = 5
     }
 
@@ -214,11 +214,11 @@ class Boss extends Enemy {
         }
         // return ["Barricade", 0]
         if (this.armor === 0) {
-            let arr = [["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
-            ["Defend", Math.ceil(9 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]]
+            let arr = [["Defend", Math.ceil(8 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))],
+            ["Defend", Math.ceil(8 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]]
             return arr[Math.floor(Math.random() * 3)];
         } else {
-            let res = ["Atk", Math.ceil(10 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
+            let res = ["Atk", Math.ceil(8 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
             return res;
         }
     }
