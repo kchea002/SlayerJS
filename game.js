@@ -1,6 +1,6 @@
 class Game {
     constructor(canvas) {
-        this.version = "Version 0.60"
+        this.version = "Version 0.61"
 
         this.canvas = document.getElementById(canvas);
         this.ctx = this.canvas.getContext("2d");
@@ -243,6 +243,26 @@ class Game {
         addEventListener("keypress", startPress3);
     }
 
+    bossWarning(){
+        this.ctx.fillStyle = "rgba(0,0,0,0.5)";
+        this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fill();
+
+        this.ctx.font = "bold 100 px Arial";
+        this.ctx.fillStyle = "red"
+        this.ctx.fillText("BOSS INCOMING", 660, 180);
+
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("PRESS ANY BUTTON TO CONTINUE", 650, 600);
+
+        const startPress4 = (event) => {
+            this.state = "playMode"
+            removeEventListener("keypress", startPress4);
+        }
+
+        addEventListener("keypress", startPress4)
+    }
+
 
 
     rootDraw(){
@@ -255,7 +275,11 @@ class Game {
         } else if (this.state === "instruction") {
             this.instructionScreen();
         } else if (this.state === "loseCard") {
+            this.background();
             this.loseCard();
+        } else if (this.state === "bossWarning") {
+            this.background();
+            this.bossWarning();
         } else if (this.state === "playMode") {
             this.background();
             this.rain.draw();
@@ -354,8 +378,12 @@ class Game {
             if (this.ctx.isPointInPath(rewardHp, event.clientX - canv.x, event.clientY - canv.y)) {
                 if (this.state === "rewardScreen") {
                     removeEventListener("click", rhp);
-                    this.player.health += (3 + this.room.level);
-                    this.state = "playMode";
+                    this.player.health += (5 + this.room.level);
+                    if (this.room.level % 5 === 0) {
+                        this.state = "bossWarning"
+                    } else {
+                        this.state = "playMode";
+                    }
                     this.deck.reload();
                     this.player.drawCards();
                     this.player.showCards();
@@ -391,7 +419,11 @@ class Game {
             if (this.state === "rewardScreen") {
                 if (this.ctx.isPointInPath(rewardStr, event.clientX - canv.x, event.clientY - canv.y)) {
                     this.deck.addCard(this.rewards[1])
-                    this.state = "playMode";
+                    if (this.room.level % 5 === 0) {
+                        this.state = "bossWarning"
+                    } else {
+                        this.state = "playMode";
+                    }
                     this.deck.reload();
                     this.player.drawCards();
                     this.player.showCards();
@@ -406,7 +438,11 @@ class Game {
             if (this.state === "rewardScreen") {
                 if (this.ctx.isPointInPath(rewardHeal, event.clientX - canv.x, event.clientY - canv.y)) {
                     this.deck.addCard(this.rewards[2])
-                    this.state = "playMode";
+                    if (this.room.level % 5 === 0) {
+                        this.state = "bossWarning"
+                    } else {
+                        this.state = "playMode";
+                    }
                     this.deck.reload();
                     this.player.drawCards();
                     this.player.showCards();
@@ -421,7 +457,11 @@ class Game {
             if (this.state === "rewardScreen") {
                 if (this.ctx.isPointInPath(rewardClothesline, event.clientX - canv.x, event.clientY - canv.y)) {
                     this.deck.addCard(this.rewards[0])
-                    this.state = "playMode";
+                    if (this.room.level % 5 === 0) {
+                        this.state = "bossWarning"
+                    } else {
+                        this.state = "playMode";
+                    }
                     this.deck.reload();
                     this.player.drawCards();
                     this.player.showCards();
@@ -429,38 +469,6 @@ class Game {
             }
         }
         addEventListener("click", rc3e);
-
-        // let rewardBloodletting = new Path2D();
-        // rewardBloodletting.rect(740, 420, 170, 170);
-        // const rc4e = (event) => {
-        //     if (this.state === "rewardScreen") {
-        //         if (this.ctx.isPointInPath(rewardBloodletting, event.clientX - canv.x, event.clientY - canv.y)) {
-        //             this.deck.addCard("bloodletting");
-        //             this.state = "playMode";
-        //             this.deck.reload();
-        //             this.player.drawCards();
-        //             this.player.showCards();
-        //         }
-        //     }
-        // }
-        // addEventListener("click", rc4e);
-
-        // let rewardMetal = new Path2D();
-        // rewardMetal.rect(440, 420, 170, 170);
-        // const rc5e = (event) => {
-        //     if (this.state === "rewardScreen") {
-        //         if (this.ctx.isPointInPath(rewardMetal, event.clientX - canv.x, event.clientY - canv.y)) {
-        //             this.deck.addCard("metal");
-        //             this.state = "playMode";
-        //             this.deck.reload();
-        //             this.player.drawCards();
-        //             this.player.showCards();
-        //         }
-        //     }
-        // }
-        // addEventListener("click", rc5e);
-
-     
 
     }
     

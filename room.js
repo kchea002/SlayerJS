@@ -32,8 +32,8 @@ class Room {
 
     nextLevel(){
         this.level += 1;
-        this.levelMult += 0.05;
-        this.actionMult += 0.05;
+        this.levelMult += 0.10;
+        this.actionMult += 0.10;
 
         if (this.level % 5 === 0) {
             this.enemy = new Boss(this.ctx, this.levelMult, this.actionMult);
