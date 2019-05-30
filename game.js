@@ -344,7 +344,7 @@ class Game {
         this.ctx.font = "italic 22px Arial";
         this.ctx.fillStyle = "white"
         this.ctx.fillText("Add a new card to your deck", 650, 200);
-        this.ctx.fillText("Cards in Deck: " + this.deck.cards.length, 650, 180);
+        this.ctx.fillText("Cards in Deck: " + this.deck.AllCards.length, 650, 180);
         
 
         this.ctx.font = "bold 30px Arial";
