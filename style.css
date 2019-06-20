@@ -3,13 +3,6 @@
 }
 
 
-#game-canvas {
-    /* background: url("https://wiki.mabinogiworld.com/images/9/98/Alby_Hardmode_Room.png") */
-    /* background-image: url("./assets/forest2.jpg"); */
-    /* width: 1000px; */
-    /* object-fit: fill; */
-    
-}
 
 #center-div {
     background: black;
@@ -41,4 +34,36 @@ body {
     width: 200px;
     height: 50px;
     font-size: 26px;
+}
+
+.icons {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-mid {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+}
+
+.ui-sound {
+    margin-top: 20px;
+}
+
+.sound-controls {
+    display: flex;
+}
+
+#mute {
+    position: relative;
+    top: 10px;
+    left: 10px;
 }

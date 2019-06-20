@@ -121,23 +121,49 @@
 
         <h1>SlayerJS</h1>
 
-      
+        
+
+        
         <canvas id="game-canvas" width="1300" height="645"> 
         </canvas>
-        <div class="ui-sound">
-            <span class="title"></span>
-            <button id="play"><i >Play</i></button>
-            <button id="pause"><i >Pause</i></button>
-            <button id="mute"><i >Mute</i></button>
+        <div class="footer">
+            <div class="footer-mid">
+                <div class="icons">
+                    <a href="https://kevincheang.com/">
+                        <img src="http://www.sclance.com/pngs/me-png/me_png_855407.png" height="60" />
+                    </a>
+                    <a href="https://github.com/kchea002/Whelp-Winter-is-Coming">
+                        <img src="https://www.freepngimg.com/thumb/github/3-2-github-png-image.png" height="60"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/kevin-cheang">
+                        <img src="https://image.flaticon.com/icons/svg/174/174857.svg" height="60" />
+                    </a>
+                </div>
+                
+                <div class="ui-sound">
+                    <span class="title"> MUSIC CONTROLS</span>
+                    <div class="sound-controls" >
+                        <div id="play"><img height="60"
+                                src="https://www.pngkit.com/png/full/0-4474_facebook-play-button-png-clip-art-white-video.png"></div>
+                        
+                        <div id="pause"><img height="60"
+                                src="https://www.seekpng.com/png/full/294-2944357_play-video-icon-pause-video-icon-pause-button.png"></div>
+                        <div id="mute"><img height="40" src="https://www.iconsdb.com/icons/preview/white/mute-2-xxl.png"></div>
+                    </div>
+                   
+                </div>
+                
+                <audio id="slash" controls style="display: none;">
+                    <source src="./assets/slash.mp3">
+                </audio>
+                
+                <audio id="shieldsound" controls style="display: none;">
+                    <source src="./assets/shield.wav">
+                </audio>
+            </div>
+           
+
         </div>
-
-        <audio id="slash" controls style="display: none;">
-            <source src="./assets/slash.mp3">
-        </audio>
-
-        <audio id="shieldsound" controls style="display: none;">
-            <source src="./assets/shield.wav">
-        </audio>
 
         <script>
             const bgm = new Audio("./assets/BGM.mp3"); 

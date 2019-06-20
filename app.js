@@ -1,4 +1,4 @@
-const database = require('./keys');
+const database = require('./keys_dev');
 
 const express = require("express");
 const bodyParser = require("body-parser");

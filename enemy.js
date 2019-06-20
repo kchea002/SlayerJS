@@ -159,7 +159,7 @@ class Knight extends Enemy {
 
         this.action = ["Barricade", 0]
         this.barricadeOn = false 
-        this.health = Math.floor(this.attributeMultiplier * (25 + (Math.random() * 10)));
+        this.health = Math.floor(this.attributeMultiplier * (30 + (Math.random() * 10)));
         // this.health = 5
     }
 
