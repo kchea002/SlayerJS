@@ -20,6 +20,7 @@ SlayerJS is a card-based roguelike game loosely based on the game “Slay the Sp
 * Two different standard enemy sprites with their own unique sprites, animations, stats, actions, and AI. 
 * Boss stage every 5 levels. 
 * Background music with play, pause, and mute functionality. 
+* Keep track of your high scores with a leaderboard!
 
 
 ## Timeline
