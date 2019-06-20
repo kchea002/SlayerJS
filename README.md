@@ -3,6 +3,8 @@
 
 [Live Demo](https://slayerjs.herokuapp.com/)
 
+![hey](https://github.com/kchea002/SlayerJS/blob/master/assets/github_readme/slayer_splash.png)
+
 SlayerJS is a card-based roguelike game loosely based on the game “Slay the Spire” created with Javascript and HTML Canvas.
 
 ## Technologies 
