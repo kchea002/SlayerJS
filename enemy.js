@@ -38,20 +38,6 @@ class Enemy {
         this.animate();
     }
 
-    // randomAction() {
-    //     let enemyActions = [
-    //         ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3)))) ], 
-    //         ["Defend", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
-    //         ["Atk", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))], 
-    //         ["Defend", Math.ceil(5 + this.actionMultiplier * (Math.floor(1.8 + (Math.random() * 3))))]
-    //     ];
-
-    //     this.shuffleArray(enemyActions);
-
-
-    //     return enemyActions[0];
-    // }
-
     displayNextAction(){
         this.ctx.font = "25px Arial";
         this.ctx.fillStyle = "orange";   
